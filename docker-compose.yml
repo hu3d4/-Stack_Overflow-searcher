@@ -37,8 +37,6 @@ services:
       dockerfile: docker/rust/Dockerfile
     container_name: diesel_rust
     restart: always
-    environment:
-      USER: root
     volumes:
       - ./:/qiita_searcher
     depends_on: 
