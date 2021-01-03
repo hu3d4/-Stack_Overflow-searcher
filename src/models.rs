@@ -4,7 +4,8 @@ use serde::Serialize;
 #[derive(Serialize)]
 pub struct LogEntry {
     pub id: u32,
-    pub text: String,
+    pub input: String,
+    pub done: bool,
 }
 
 #[derive(Template)]

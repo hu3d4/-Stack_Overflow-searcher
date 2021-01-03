@@ -12,11 +12,13 @@ pub async fn index() -> Result<impl Responder, MyError> {
 
     entries.push(LogEntry {
         id: 1,
-        text: "First entry".to_string(),
+        input: "First entry".to_string(),
+        done: false,
     });
     entries.push(LogEntry {
         id: 2,
-        text: "Second entry".to_string(),
+        input: "Second entry".to_string(),
+        done: false,
     });
 
     let html = IndexTemplate { entries };
