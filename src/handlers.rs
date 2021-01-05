@@ -1,5 +1,5 @@
 use crate::errors::MyError;
-use crate::models::{IndexTemplate, LogEntry};
+use crate::models::{History, IndexTemplate};
 use actix_web::{HttpResponse, Responder};
 use askama::Template;
 
@@ -10,12 +10,12 @@ use askama::Template;
 pub async fn index() -> Result<impl Responder, MyError> {
     let mut entries = Vec::new();
 
-    entries.push(LogEntry {
+    entries.push(History {
         id: 1,
         input: "First entry".to_string(),
         done: false,
     });
-    entries.push(LogEntry {
+    entries.push(History {
         id: 2,
         input: "Second entry".to_string(),
         done: false,
