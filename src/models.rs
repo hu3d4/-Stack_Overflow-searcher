@@ -12,9 +12,9 @@ pub struct History {
 
 #[derive(Insertable)]
 #[table_name = "history"]
-pub struct HistoryEntry {
-    pub input: String,
-    pub done: bool,
+pub struct HistoryEntry<'a> {
+    pub input: &'a str,
+    // pub done: &'a bool,
 }
 
 #[derive(Template)]

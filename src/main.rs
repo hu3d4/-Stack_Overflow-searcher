@@ -1,3 +1,4 @@
+mod db;
 mod errors;
 mod handlers;
 mod models;
@@ -10,17 +11,33 @@ use actix_web::{web, App, HttpServer};
 extern crate diesel;
 extern crate dotenv;
 
-use diesel::pg::PgConnection;
-use diesel::prelude::*;
-use dotenv::dotenv;
-use std::env;
+// use crate::models::{History, HistoryEntry};
 
-pub fn establish_connection() -> PgConnection {
-    dotenv().ok();
+// use diesel::pg::PgConnection;
+// use diesel::prelude::*;
+// use dotenv::dotenv;
+// use std::env;
 
-    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
-}
+// pub async fn establish_connection() -> PgConnection {
+//     dotenv().ok();
+
+//     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+//     PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
+// }
+
+// pub async fn create_post<'a>(
+//     conn: &PgConnection,
+//     input: &'a str, /* done: &'a bool */
+// ) -> History {
+//     use schema::history;
+
+//     let history_entory = HistoryEntry { input, /* done */ };
+
+//     diesel::insert_into(history::table)
+//         .values(&history_entory)
+//         .get_result(conn)
+//         .expect("Error saving new post")
+// }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
