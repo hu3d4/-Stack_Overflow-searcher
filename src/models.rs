@@ -5,7 +5,7 @@ use serde::Serialize;
 
 #[derive(Serialize, Queryable)]
 pub struct History {
-    pub id: u32,
+    pub id: i32,
     pub input: String,
     pub done: bool,
 }
