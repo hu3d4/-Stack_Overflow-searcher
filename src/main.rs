@@ -25,7 +25,10 @@ pub fn establish_connection() -> PgConnection {
     PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn create_post<'a>(conn: &PgConnection, input: &'a str /* , done: &'a bool */) -> History {
+pub async fn create_post<'a>(
+    conn: &PgConnection,
+    input: &'a str, /* , done: &'a bool */
+) -> History {
     // use schema::*;
     let history_entory = HistoryEntry { input, /* done */ };
     diesel::insert_into(history::table)
@@ -34,7 +37,7 @@ pub fn create_post<'a>(conn: &PgConnection, input: &'a str /* , done: &'a bool *
         .expect("Error saving new post")
 }
 
-pub fn output() {
+pub async fn output() {
     use crate::diesel::prelude::*;
     use crate::schema::history::dsl::*;
 
