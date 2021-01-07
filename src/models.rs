@@ -20,5 +20,5 @@ pub struct HistoryEntry<'a> {
 #[derive(Template)]
 #[template(path = "index.html")]
 pub struct IndexTemplate {
-    pub results: Vec<History>,
+    pub entries: Vec<History>,
 }

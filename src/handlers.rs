@@ -10,16 +10,17 @@ use askama::Template;
 
 pub async fn index() -> Result<impl Responder, MyError> {
     // let mut entries = Vec::new();
+    let entries = show_history();
 
-    use crate::diesel::prelude::*;
-    use crate::schema::history::dsl::*;
+    // use crate::diesel::prelude::*;
+    // use crate::schema::history::dsl::*;
 
-    let connection = establish_connection();
-    let results = history
-        .filter(done.eq(true))
-        .limit(5)
-        .load::<History>(&connection)
-        .expect("Error loading posts");
+    // let connection = establish_connection();
+    // let results = history
+    //     .filter(done.eq(true))
+    //     .limit(5)
+    //     .load::<History>(&connection)
+    //     .expect("Error loading posts");
 
     // entries.push(results);
 
@@ -34,7 +35,7 @@ pub async fn index() -> Result<impl Responder, MyError> {
     //     done: false,
     // });
 
-    let html = IndexTemplate { results };
+    let html = IndexTemplate { entries };
     let response_body = html.render()?;
     Ok(HttpResponse::Ok()
         .content_type("text/html")
