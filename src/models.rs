@@ -14,7 +14,6 @@ pub struct History {
 #[table_name = "history"]
 pub struct HistoryEntry<'a> {
     pub input: &'a str,
-    // pub done: &'a bool,
 }
 
 #[derive(Template)]
