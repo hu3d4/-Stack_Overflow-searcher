@@ -24,5 +24,3 @@ services:
       - ./:/qiita_searcher
     depends_on: 
       - postgres
-    # environment: 
-    #   DATABASE_URL: postgres://qiita_searcher:qiita_searcher_password@postgres/qiita_searcher

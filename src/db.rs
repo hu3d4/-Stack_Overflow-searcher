@@ -1,7 +1,6 @@
 use crate::models::{History, HistoryEntry};
 use crate::schema::*;
 
-use actix_web::{HttpResponse, Responder};
 use diesel::pg::PgConnection;
 use diesel::prelude::*;
 use dotenv::dotenv;
@@ -13,12 +12,8 @@ pub fn establish_connection() -> PgConnection {
     PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
 }
 
-pub async fn create_post<'a>(
-    conn: &PgConnection,
-    input: &'a str, /* , done: &'a bool */
-) -> History {
-    // use schema::*;
-    let history_entory = HistoryEntry { input, /* done */ };
+pub async fn create_post<'a>(conn: &PgConnection, input: &'a str) -> History {
+    let history_entory = HistoryEntry { input };
     diesel::insert_into(history::table)
         .values(&history_entory)
         .get_result(conn)
@@ -35,11 +30,4 @@ pub fn show_history() -> Vec<History> {
         .limit(5)
         .load::<History>(&connection)
         .expect("Error loading posts");
-
-    // println!("Displaying {} posts", results.len());
-    // for post in results {
-    //     println!("{}", post.input);
-    //     println!("----------\n");
-    //     // println!("{}", post.body);
-    // }
 }
