@@ -14,7 +14,10 @@ extern crate dotenv;
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
-        App::new().route("/", web::get().to(index))
+        App::new()
+            .route("/", web::get().to(index))
+            // .route("http://google.com/cse", web::get().to(history))
+            .route("http://google.com/cse", web::get().to(add_history))
         // .route("/test", web::get().to(manual_hello))
     })
     .bind(("127.0.0.1", 8080))?
