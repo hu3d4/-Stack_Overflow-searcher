@@ -16,7 +16,6 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(index))
-            // .route("http://google.com/cse", web::get().to(history))
             .route("/add", web::get().to(add_history))
         // .route("/test", web::get().to(manual_hello))
     })
