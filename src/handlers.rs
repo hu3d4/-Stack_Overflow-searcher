@@ -6,7 +6,7 @@ use askama::Template;
 
 pub async fn add_history() -> Result<impl Responder, MyError> {
     let connection = establish_connection();
-    let input = "CS:GO";
+    let input = "Hello World!";
     // let test = AddHistory { input };
     // let test = AddHistory { input: "hello" };
     create_post(&connection, input);
