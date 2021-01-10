@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends 'templates/index.html' %}
 
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8" />
-    <title>Qiita Searcher</title>
-</head>
-
-<body>
-
-    <div>
-        <div>
-            <datalist id="example">
-                {% for entry in entries %}
-                <option value="{{ entry.input }}"></option>
-                {% endfor %}
-            </datalist>
-        </div>
-    </div>
-
-</body>
-
-</html>
+{% block history %}
+    <datalist id="example">
+        {% for entry in entries %}
+        <option value="{{ entry.input }}"></option>
+        {% endfor %}
+    </datalist>
+    <p>jfeiaofwje</p>
+{% endblock %}

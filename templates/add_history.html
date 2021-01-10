@@ -1,18 +1,9 @@
-<html>
-
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8" />
-    <title>Qiita Searcher</title>
-</head>
-
-<body>
+{% extends 'templates/index.html' %}
+{% block qiita_history_form %}
     <form id="cse-search-box" action="http://google.com/cse">
         <input type="hidden" name="cx" value="4703ca6da52d3c5fd" />
         <input type="hidden" name="ie" value="UTF-8" />
-        <input type="text" name="q" list="example" size="31" value="{{ input }}" />
+        <input type="text" name="q" list="example" size="31" />
         <input type="submit" name="sa" value="Search" />
     </form>
-</body>
-
-</html>
+{% endblock qiita_history_form %}

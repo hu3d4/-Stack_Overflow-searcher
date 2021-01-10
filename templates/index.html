@@ -9,9 +9,13 @@
 
 <body>
 
-    {% include "templates/history.html" %}
+    <div id="history">
+        {% block history %}{% endblock %}
+    </div>
 
-    {% include "templates/add_history.html" %}
+    <div id="content">
+        {% block qiita_history_form %}{% endblock  %}
+    </div>
 
 </body>
 
