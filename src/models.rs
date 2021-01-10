@@ -11,14 +11,14 @@ pub struct History {
 }
 
 #[derive(Insertable, Template)]
-#[template(path = "add_history.html")]
+#[template(path = "index.html")]
 #[table_name = "history"]
 pub struct AddHistory<'a> {
     pub input: &'a str,
 }
 
 #[derive(Template)]
-#[template(path = "history.html")]
+#[template(path = "index.html")]
 pub struct IndexTemplate {
     pub entries: Vec<History>,
 }
