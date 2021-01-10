@@ -1,0 +1,16 @@
+<history class="his">
+
+    <datalist id="example">
+        {% for entry in entries %}
+        <option value="{{ entry.input }}"></option>
+        {% endfor %}
+    </datalist>
+
+    <form id="cse-search-box" action='http://google.com/cse' >
+        <input type="hidden" name="cx" value="4703ca6da52d3c5fd" />
+        <input type="hidden" name="ie" value="UTF-8" />
+        <input type="text" name="q" list="example" size="31" />
+        <input type="submit" name="sa" value="Search" action="/add" />
+    </form>
+
+<history class="his">
