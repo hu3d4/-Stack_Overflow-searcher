@@ -19,13 +19,6 @@ pub fn create_post<'a>(conn: &PgConnection, input: &'a str) -> History {
         .get_result(conn)
         .expect("Error saving new post")
 }
-// pub async fn create_post<'a>(conn: &PgConnection, input: &'a str) -> History {
-//     let history_entory = AddHistory { input };
-//     diesel::insert_into(history::table)
-//         .values(&history_entory)
-//         .get_result(conn)
-//         .expect("Error saving new post")
-// }
 
 pub fn show_history() -> Vec<History> {
     use crate::diesel::prelude::*;
