@@ -16,6 +16,12 @@ pub struct AddHistory<'a> {
     pub input: &'a str,
 }
 
+// #[derive(Serialize, Insertable)]
+// #[table_name = "history"]
+// pub struct AddHistory {
+//     pub input: String,
+// }
+
 #[derive(Template)]
 #[template(path = "search-form.html")]
 pub struct IndexTemplate {
