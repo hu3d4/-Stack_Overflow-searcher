@@ -6,16 +6,21 @@
         {% endfor %}
     </datalist>
 
-    <form id="cse-search-box" action="/add" />
+    <form action="/add" onsubmit="return compare(this);">
         <input type="hidden" name="cx" value="4703ca6da52d3c5fd" />
         <input type="hidden" name="ie" value="UTF-8" />
         <input type="text" name="q" list="example" size="31" />
-        <input type="submit" name="sa" value="Search" onclick="multipleaction()" />
+        <input type="submit" name="sa" value="Search" />
     </form>
 
+    <iframe id="AAA" src="http://google.com/cse"></iframe>
+
     <script>
-        function multipleaction() {
-            document.getElementById("cse-search-box").setAttribute("action", "http://google.com/cse");
+        function compare(f) {
+            var t = f.elements["q"].value;
+            document.getElementById("AAA").src = "http://google.com/cse";
+            document.getElementById("BBB").src = "http://google.com/cse" + t;
+            return false;
         }
     </script>
 
