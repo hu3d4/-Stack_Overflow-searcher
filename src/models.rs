@@ -1,7 +1,7 @@
 use crate::schema::history;
 
 use askama::Template;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Queryable)]
 pub struct History {
@@ -10,7 +10,7 @@ pub struct History {
     pub done: bool,
 }
 
-#[derive(Insertable)]
+#[derive(Insertable, Deserialize)]
 #[table_name = "history"]
 pub struct AddHistory<'a> {
     pub input: &'a str,

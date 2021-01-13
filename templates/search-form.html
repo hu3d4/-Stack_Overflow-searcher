@@ -6,33 +6,27 @@
         {% endfor %}
     </datalist>
 
-<form id="custom-search" action="http://google.com/cse" target="_blank" >
-    <input type="hidden" name="cx" value="4703ca6da52d3c5fd" />
-    <input type="hidden" name="ie" value="UTF-8" />
-    <input type="text" name="q" list="example" size="31" />
-</form>
-<form id="history" action="/add" target="_blank">
+    <script type="text/javascript">
+        function searchGoogle(q) {
+            document.forms['searchForm'].elements['q'].value=q;
+            document.forms['searchForm'].submit();
+            return false;
+        }
 
-<input type="button" name="sa" value="new searhc button" onClick="send()">
+        function selectId() {
+            document.forms['custom-search'].elements['search-box'].value;
+        }
+    </script>
 
-<script type="text/javascript">
-    function send() {
-        sendFormFromIframe(document.getElementById('custom-search'));
-        sendFormFromIframe(document.getElementById('history'));
-    }
+    <form id="custom-search" action="/add">
+        <input type="text" id="search-box" list="example" size="31" value="" />
+        <input type="submit" name="sa" value="Search" onclick="return searchGoogle(selectId())" />
+    </form>
 
-    function sendFormFromIframe(form) {
-        const iframe = document.createElement('iframe');
-        iframe.src = "./tmp";
-        iframe.style.display = 'none';
-        document.body.appendChild(iframe);
-        iframe.onload = function() {
-            const iframeDocument = iframe.contentDocument;
-            const clonedForm = iframeDocument.importNode(form, true);
-            iframeDocument.body.appendChild(clonedForm);
-            clonedForm.submit();
-        };
-    }
-</script>
+    <form action="http://google.com/cse" id="searchForm" style="display:none;">
+        <input type="hidden" name="cx" value="4703ca6da52d3c5fd" />
+        <input type="hidden" name="ie" value="UTF-8" />
+        <input type="hidden" name="q"/>
+    </form>
 
 <history class="his">
