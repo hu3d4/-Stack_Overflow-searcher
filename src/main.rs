@@ -17,7 +17,6 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .route("/", web::get().to(index))
             .route("/add", web::get().to(add_history))
-        // .route("/add", web::get().to(add_history))
         // .route("/test", web::get().to(manual_hello))
     })
     .bind(("127.0.0.1", 8080))?
