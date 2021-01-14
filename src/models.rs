@@ -12,24 +12,12 @@ pub struct History {
 
 #[derive(Insertable, Deserialize)]
 #[table_name = "history"]
-pub struct AddHistory {
-    pub input: String,
+pub struct AddHistory<'a> {
+    pub input: &'a str,
 }
-
-// #[derive(Serialize, Insertable)]
-// #[table_name = "history"]
-// pub struct AddHistory {
-//     pub input: String,
-// }
 
 #[derive(Template)]
 #[template(path = "search-form.html")]
 pub struct IndexTemplate {
     pub entries: Vec<History>,
-}
-
-#[derive(Deserialize)]
-pub struct Register {
-    pub username: String,
-    pub country: String,
 }

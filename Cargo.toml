@@ -15,7 +15,3 @@ serde = { version = "1.0.118", feature = ["derive"] }
 thiserror = "1.0.23"
 diesel = { version = "1.4.5", features = ["postgres"] }
 dotenv = "0.15.0"
-params = "0.8.0"
-iron = "0.6.1"
-router = "0.6.0"
-handlebars-iron = "0.29.0"
