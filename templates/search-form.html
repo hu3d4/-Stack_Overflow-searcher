@@ -14,12 +14,12 @@
         }
 
         function selectId() {
-            document.getElementById(search-box).value;
+            document.getElementByName(input).value;
         }
     </script>
 
-    <form id="custom-search" action="/add" >
-        <input type="text" id="search-box" list="example" size="31" value="" />
+    <form id="custom-search" action="/add" method="post">
+        <input type="text" name="input" list="example" size="31" value="" />
         <input type="submit" name="sa" value="Search" onclick="return searchGoogle(selectId())" />
     </form>
 

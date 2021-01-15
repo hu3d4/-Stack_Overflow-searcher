@@ -12,7 +12,7 @@ pub fn establish_connection() -> PgConnection {
     PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn create_post<'a>(conn: &PgConnection, input: &'a str) -> History {
+pub fn create_post(conn: &PgConnection, input: String) -> History {
     let history_entory = AddHistory { input };
     diesel::insert_into(history::table)
         .values(&history_entory)

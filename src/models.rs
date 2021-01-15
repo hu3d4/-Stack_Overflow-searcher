@@ -12,8 +12,8 @@ pub struct History {
 
 #[derive(Insertable, Deserialize)]
 #[table_name = "history"]
-pub struct AddHistory<'a> {
-    pub input: &'a str,
+pub struct AddHistory {
+    pub input: String,
 }
 
 #[derive(Template)]
