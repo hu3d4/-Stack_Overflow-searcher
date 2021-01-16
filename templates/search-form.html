@@ -18,9 +18,9 @@
         }
     </script>
 
-    <form id="custom-search" action="/add" method="post">
+    <form id="custom-search" action="/add" method="post" target="add">
         <input type="text" name="input" list="example" size="31" value="" />
-        <input type="submit" name="sa" value="Search" onclick="return searchGoogle(selectId())" />
+        <input type="submit" name="sa" value="Search" />
     </form>
 
     <form action="http://google.com/cse" id="searchForm" style="display:none;">
@@ -28,5 +28,7 @@
         <input type="hidden" name="ie" value="UTF-8" />
         <input type="hidden" name="q" value="" />
     </form>
+
+    <iframe name="add" style="display:none;"></iframe>
 
 <history class="his">
