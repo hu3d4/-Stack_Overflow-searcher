@@ -6,21 +6,9 @@
         {% endfor %}
     </datalist>
 
-    <script type="text/javascript">
-        function searchGoogle(q) {
-            document.forms['searchForm'].elements['q'].value=q;
-            document.forms['searchForm'].submit();
-            return false;
-        }
-
-        function selectId() {
-            document.getElementByName(input).value;
-        }
-    </script>
-
-    <form id="custom-search" action="/add" method="post">
+    <form id="custom-search" action="/add" method="post" target="add">
         <input type="text" name="input" list="example" size="31" value="" />
-        <input type="submit" name="sa" value="Search" onclick="return searchGoogle(selectId())" />
+        <input type="submit" name="sa" value="Search" />
     </form>
 
     <form action="http://google.com/cse" id="searchForm" style="display:none;">
@@ -28,5 +16,9 @@
         <input type="hidden" name="ie" value="UTF-8" />
         <input type="hidden" name="q" value="" />
     </form>
+
+    <iframe name="add" style="display:none;"></iframe>
+
+    <script type="text/javascript" src="../index.js"></script>
 
 <history class="his">
