@@ -7,11 +7,11 @@
     </datalist>
 
     <form id="addHistory" action="/add" method="post" target="add">
-        <input type="text" name="input" list="example" size="31" value="" />
-        <input type="submit" name="sa" value="Search" />
+        <input type="text" name="input" id="input" list="example" size="31" value="" />
+        <input type="submit" name="sa" value="Search" style="display:none;" />
     </form>
 
-    <button id="searchButton" onclick="callAfter()">googleSearch</button>
+    <button id="searchButton" onclick="callAfter()">Search</button>
 
     <form action="http://google.com/cse" id="customSearch" style="display:none;">
         <input type="hidden" name="cx" value="4703ca6da52d3c5fd" />
@@ -27,6 +27,8 @@
         }
 
         function customSearch() {
+            let input_text = document.getElementById("input").value;
+            document.forms['customSearch'].elements['q'].value=input_text;
             document.forms['customSearch'].submit();
         }
 
@@ -37,7 +39,5 @@
             }
         }
     </script>
-
-    <script type="text/javascript" src="../index.js"></script>
 
 <history class="his">
