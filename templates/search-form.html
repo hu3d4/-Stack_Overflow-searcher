@@ -6,18 +6,37 @@
         {% endfor %}
     </datalist>
 
-    <form id="custom-search" action="/add" method="post" target="add">
+    <form id="addHistory" action="/add" method="post" target="add">
         <input type="text" name="input" list="example" size="31" value="" />
         <input type="submit" name="sa" value="Search" />
     </form>
 
-    <form action="http://google.com/cse" id="searchForm" style="display:none;">
+    <button id="searchButton" onclick="callAfter()">googleSearch</button>
+
+    <form action="http://google.com/cse" id="customSearch" style="display:none;">
         <input type="hidden" name="cx" value="4703ca6da52d3c5fd" />
         <input type="hidden" name="ie" value="UTF-8" />
         <input type="hidden" name="q" value="" />
     </form>
 
     <iframe name="add" style="display:none;"></iframe>
+
+    <script>
+        function addHistory() {
+            document.forms['addHistory'].submit();
+        }
+
+        function customSearch() {
+            document.forms['customSearch'].submit();
+        }
+
+        function callAfter() {
+            let acc = [customSearch(), addHistory()]
+            while (acc.length > 0) {
+                acc.shift();
+            }
+        }
+    </script>
 
     <script type="text/javascript" src="../index.js"></script>
 
