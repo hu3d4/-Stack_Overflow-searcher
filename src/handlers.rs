@@ -14,7 +14,8 @@ pub async fn add_history(form: web::Form<AddHistory>) -> Result<impl Responder, 
 }
 
 pub async fn index() -> Result<impl Responder, AppError> {
-    let entries = show_history();
+    let connection = establish_connection();
+    let entries = show_history(&connection);
     let html = IndexTemplate { entries };
     let response_body = html.render()?;
     Ok(HttpResponse::Ok()

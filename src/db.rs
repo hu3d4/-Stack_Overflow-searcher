@@ -20,13 +20,12 @@ pub fn create_post(conn: &PgConnection, input: String) -> History {
         .expect("Error saving new post")
 }
 
-pub fn show_history() -> Vec<History> {
+pub fn show_history(conn: &PgConnection) -> Vec<History> {
     use crate::diesel::prelude::*;
     use crate::schema::history::dsl::*;
-    let connection = establish_connection();
     return history
         .filter(done.eq(true))
         .limit(15)
-        .load::<History>(&connection)
+        .load::<History>(conn)
         .expect("Error loading posts");
 }
