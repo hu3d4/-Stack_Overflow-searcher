@@ -8,10 +8,8 @@
 
     <form id="addHistory" action="/add" method="post" target="add">
         <input type="text" name="input" id="input" list="example" size="31" value="" />
-        <input type="submit" name="sa" value="Search" style="display:none;" />
+        <input type="submit" name="sa" value="Search" onclick="callAfter()" />
     </form>
-
-    <button id="searchButton" onclick="callAfter()">Search</button>
 
     <form action="http://google.com/cse" id="customSearch" style="display:none;">
         <input type="hidden" name="cx" value="4703ca6da52d3c5fd" />
