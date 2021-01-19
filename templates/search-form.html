@@ -6,7 +6,7 @@
         {% endfor %}
     </datalist>
 
-    <form id="addHistory" action="/add" method="post" target="add">
+    <form id="addHistory" action="/get" method="post" target="get">
         <input type="text" name="input" id="input" list="example" size="31" value="" />
         <input type="submit" name="sa" value="Search" onclick="callAfter()" />
     </form>
@@ -17,7 +17,7 @@
         <input type="hidden" name="q" value="" />
     </form>
 
-    <iframe name="add" style="display:none;"></iframe>
+    <iframe name="get" style="display:none;"></iframe>
 
     <script>
         function addHistory() {
