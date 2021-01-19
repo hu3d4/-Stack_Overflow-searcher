@@ -11,7 +11,7 @@ actix-rt = "1.1.1"
 actix-web = "3.3.2"
 askama = "0.10.5"
 config = "0.10.1"
-serde = { version = "1.0.118", feature = ["derive"] }
+serde = { version = "1.0.119", feature = ["derive"] }
 thiserror = "1.0.23"
 diesel = { version = "1.4.5", features = ["postgres"] }
 dotenv = "0.15.0"
