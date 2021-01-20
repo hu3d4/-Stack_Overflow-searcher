@@ -12,20 +12,22 @@ pub fn establish_connection() -> PgConnection {
     PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn add_history(conn: &PgConnection, input: String) -> History {
+pub fn add_history(input: String) -> History {
     let history_entory = AddHistory { input };
+    let conn = establish_connection();
     diesel::insert_into(history::table)
         .values(&history_entory)
-        .get_result(conn)
+        .get_result(&conn)
         .expect("Error saving new post")
 }
 
-pub fn show_history(conn: &PgConnection) -> Vec<History> {
+pub fn show_history() -> Vec<History> {
     use crate::diesel::prelude::*;
     use crate::schema::history::dsl::*;
+    let conn = establish_connection();
     return history
         .filter(done.eq(true))
         .limit(15)
-        .load::<History>(conn)
+        .load::<History>(&conn)
         .expect("Error loading posts");
 }
