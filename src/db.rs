@@ -1,4 +1,4 @@
-use crate::models::{AddHistory, DeleteHistory, History};
+use crate::models::{AddHistory, History};
 use crate::schema::*;
 
 use diesel::pg::PgConnection;
@@ -32,25 +32,9 @@ pub fn show_history() -> Vec<History> {
         .expect("Error loading posts");
 }
 
-// pub fn delete_history(input: String) -> History {
-//     let history_entory = AddHistory { input };
-//     let conn = establish_connection();
-//     diesel::delete(history::table)
-//         .values(&history_entory)
-//         .get_result(&conn)
-//         .expect("Error saving new post")
-// }
-
 pub fn delete_history() {
-    // let history_entory = AddHistory { input };
     let conn = establish_connection();
-    let deleted_count = diesel::delete(history::table.filter(history::id.gt(0)))
+    diesel::delete(history::table.filter(history::id.gt(0)))
         .execute(&conn)
         .expect("Failed to clean up history");
-    println!("Deleted {} photo(s)", deleted_count);
-
-    // diesel::delete(history::table)
-    //     .values(&history_entory)
-    //     .get_result(&conn)
-    //     .expect("Error saving new post")
 }

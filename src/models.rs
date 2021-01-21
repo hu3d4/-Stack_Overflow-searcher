@@ -21,9 +21,3 @@ pub struct AddHistory {
 pub struct IndexTemplate {
     pub entries: Vec<History>,
 }
-
-#[derive(Insertable, Deserialize)]
-#[table_name = "history"]
-pub struct DeleteHistory {
-    pub input: String,
-}
