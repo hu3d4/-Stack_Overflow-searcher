@@ -1,6 +1,6 @@
 use crate::db;
 use crate::errors::AppError;
-use crate::models::{AddHistory, IndexTemplate};
+use crate::models::{AddHistory, DeleteHistory, IndexTemplate};
 use actix_web::{http::header, web, HttpResponse, Responder};
 use askama::Template;
 
@@ -20,3 +20,18 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .content_type("text/html")
         .body(response_body))
 }
+
+pub async fn delete_history() -> Result<impl Responder, AppError> {
+    db::delete_history();
+    Ok(HttpResponse::SeeOther()
+        .header(header::LOCATION, "/")
+        .finish())
+}
+
+// pub async fn delete_history(form: web::Form<DeleteHistory>) -> Result<impl Responder, AppError> {
+//     let delete = form.input.clone();
+//     db::delete_history(delete);
+//     Ok(HttpResponse::SeeOther()
+//         .header(header::LOCATION, "/")
+//         .finish())
+// }

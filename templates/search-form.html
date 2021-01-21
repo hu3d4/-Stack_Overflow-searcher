@@ -14,6 +14,13 @@
         {% endfor %}
     </datalist>
 
+    <form id="addHistory" action="/delete" method="post" target="delete">
+        <input type="text" size="31" value="" />
+        <input type="submit" value="Delete" />
+    </form>
+
+    <iframe name="delete" style="display:none;"></iframe>
+
     <form id="addHistory" action="/get" method="post" target="get">
         <input type="text" name="input" id="input" list="example" size="31" value="" />
         <input type="submit" name="sa" value="Search" onclick="callAfter()" />
