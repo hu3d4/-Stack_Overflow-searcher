@@ -31,3 +31,10 @@ pub fn show_history() -> Vec<History> {
         .load::<History>(&conn)
         .expect("Error loading posts");
 }
+
+pub fn delete_history() {
+    let conn = establish_connection();
+    diesel::delete(history::table.filter(history::id.gt(0)))
+        .execute(&conn)
+        .expect("Failed to clean up history");
+}
