@@ -11,7 +11,7 @@ use actix_web::{web, App, HttpServer};
 extern crate diesel;
 extern crate dotenv;
 
-#[actix_web::main]
+#[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
