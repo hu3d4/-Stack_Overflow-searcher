@@ -38,3 +38,12 @@ pub fn delete_history() {
         .execute(&conn)
         .expect("Failed to clean up history");
 }
+
+pub fn delete_only_history(idd: i32) {
+    use crate::schema::history::dsl::{history, id};
+    println!("{}", idd);
+    let conn = establish_connection();
+    diesel::delete(history.filter(id.eq(idd)))
+        .execute(&conn)
+        .expect("msg: &str");
+}
