@@ -10,9 +10,9 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: qiita_searcher_password
-      POSTGRES_USER: qiita_searcher
-      POSTGRES_DB: qiita_searcher
+      POSTGRES_PASSWORD: so_searcher_password
+      POSTGRES_USER: so_searcher
+      POSTGRES_DB: so_searcher
 
   rust:
     build: 
@@ -21,6 +21,6 @@ services:
     container_name: diesel_rust
     restart: always
     volumes:
-      - ./:/qiita_searcher
+      - ./:/so_searcher
     depends_on: 
       - postgres
