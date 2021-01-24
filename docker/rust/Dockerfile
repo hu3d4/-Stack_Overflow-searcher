@@ -1,6 +1,6 @@
 FROM rust:1.48
 
-WORKDIR /qiita_searcher
+WORKDIR /so_searcher
 
 COPY . .
 
@@ -13,4 +13,4 @@ RUN cargo build --release
 
 RUN cargo install --path .
 
-CMD [ "cargo", "run", "qiita_searcher" ]
+CMD [ "cargo", "run", "so_searcher" ]
