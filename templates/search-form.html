@@ -32,10 +32,16 @@
         <input type="submit" value="All Delete" />
     </form>
 
-    <form id="DeleteHistory" action="/one_delete" method="post">
-        <input type="text" size="31" value="5" style="display:none;" />
-        <input type="submit" value="Delete" />
-    </form>
+    <ul>
+        {% for entry in entries %}
+            <li>{{ entry.input }}</li>
+            <li>{{ entry.id }}</li>
+            <form id="DeleteHistory" action="/one_delete" method="post">
+                <input type="text" size="31" value="{{ entry.id }}" style="display:none;" />
+                <input type="submit" value="Delete" />
+            </form>
+        {% endfor %}
+    </ul>
 
     <script>
         function addHistory() {
