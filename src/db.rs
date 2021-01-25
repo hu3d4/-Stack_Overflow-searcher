@@ -31,7 +31,7 @@ pub fn show_history() -> Vec<History> {
         .expect("Error loading posts");
 }
 
-pub fn delete_history() {
+pub fn delete_all_history() {
     let conn = establish_connection();
     diesel::delete(history::table.filter(history::id.gt(0)))
         .execute(&conn)

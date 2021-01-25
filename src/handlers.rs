@@ -21,8 +21,8 @@ pub async fn add_history(form: web::Form<AddHistory>) -> Result<impl Responder, 
         .finish())
 }
 
-pub async fn delete_history() -> Result<impl Responder, AppError> {
-    db::delete_history();
+pub async fn delete_all_history() -> Result<impl Responder, AppError> {
+    db::delete_all_history();
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())

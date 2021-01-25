@@ -17,7 +17,7 @@ async fn main() -> std::io::Result<()> {
         App::new()
             .route("/", web::get().to(index))
             .route("/get", web::post().to(add_history))
-            .route("/delete", web::post().to(delete_history))
+            .route("/delete_all", web::post().to(delete_all_history))
             .route("/one_delete", web::post().to(delete_one_history))
     })
     .bind(("127.0.0.1", 8080))?
