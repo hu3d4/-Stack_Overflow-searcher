@@ -1,4 +1,4 @@
-use crate::models::{AddHistory, History};
+use crate::models::{AddHistory, DeleteHistory, History};
 use crate::schema::*;
 
 use diesel::pg::PgConnection;
@@ -39,11 +39,21 @@ pub fn delete_history() {
         .expect("Failed to clean up history");
 }
 
-pub fn delete_only_history(idd: i32) {
-    use crate::schema::history::dsl::{history, id};
-    println!("{}", idd);
+// pub fn delete_one_history() {
+//     use crate::schema::history::dsl::{history, id};
+//     let conn = establish_connection();
+//     diesel::delete(history.filter(id.eq(32)))
+//         .execute(&conn)
+//         .expect("msg: &str");
+// }
+
+pub fn delete_one_history(id: i32) {
+    let delete_entory = DeleteHistory { id };
+    use crate::schema::history::dsl;
+    let result = &delete_entory.id;
+    println!("{:?}", result);
     let conn = establish_connection();
-    diesel::delete(history.filter(id.eq(idd)))
+    diesel::delete(dsl::history.filter(dsl::id.eq(result)))
         .execute(&conn)
         .expect("msg: &str");
 }

@@ -28,12 +28,20 @@ pub async fn delete_history() -> Result<impl Responder, AppError> {
         .finish())
 }
 
-pub async fn delete_only_history(
+pub async fn delete_one_history(
     form: web::Form<DeleteHistory>,
 ) -> Result<impl Responder, AppError> {
-    let com = form.id.clone();
-    db::delete_only_history(com);
+    let com = form.id;
+    println!("{}", com);
+    db::delete_one_history(com);
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())
 }
+
+// pub async fn delete_one_history() -> Result<impl Responder, AppError> {
+//     db::delete_one_history();
+//     Ok(HttpResponse::SeeOther()
+//         .header(header::LOCATION, "/")
+//         .finish())
+// }

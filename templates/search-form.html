@@ -27,16 +27,17 @@
 
     <iframe name="get" style="display:none;"></iframe>
 
-    <form id="DeleteHistory" action="/delete" method="post">
+    <form action="/delete" method="post">
         <input type="text" size="31" value="" style="display:none;" />
         <input type="submit" value="All Delete" />
     </form>
 
     <ul>
         {% for entry in entries %}
-            <li>{{entry.input}}</li>
-            <form id="DeleteHistory" action="/only_delete" method="post">
-                <input type="text" size="31" value="{{entry.id}}" style="display:none;" />
+            <li>{{ entry.input }}</li>
+            <li>{{ entry.id }}</li>
+            <form id="DeleteHistory" action="/one_delete" method="get">
+                <input type="text" size="31" value="{{ entry.id }}" style="display:none;" />
                 <input type="submit" value="Delete" />
             </form>
         {% endfor %}
