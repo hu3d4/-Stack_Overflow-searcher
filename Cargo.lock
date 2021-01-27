@@ -1302,20 +1302,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "qiita_searcher"
-version = "0.1.0"
-dependencies = [
- "actix-rt",
- "actix-web",
- "askama",
- "config",
- "diesel",
- "dotenv",
- "serde 1.0.119",
- "thiserror",
-]
-
-[[package]]
 name = "quick-error"
 version = "1.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1569,6 +1555,20 @@ name = "smallvec"
 version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ae524f056d7d770e174287294f562e95044c68e88dec909a00d2094805db9d75"
+
+[[package]]
+name = "so_searcher"
+version = "0.1.0"
+dependencies = [
+ "actix-rt",
+ "actix-web",
+ "askama",
+ "config",
+ "diesel",
+ "dotenv",
+ "serde 1.0.119",
+ "thiserror",
+]
 
 [[package]]
 name = "socket2"
