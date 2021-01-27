@@ -1,0 +1,32 @@
+.search {
+    width: 370px;
+    height: 29px;
+}
+
+.search__box {
+    width: 263px;
+}
+
+.search__button {
+    color: #FFF;
+    background-color: #461200;
+    width: 71px;
+    height: 29px;
+}
+
+.delete {
+    width: 71px;
+    padding-top: 3px;
+}
+
+.content {
+    display: flex;
+    width: 440px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 30px;
+}
+
+.main {
+    background-color: #FFFFFF;
+}
