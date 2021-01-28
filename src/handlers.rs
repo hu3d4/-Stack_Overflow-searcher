@@ -15,14 +15,14 @@ pub async fn index() -> Result<impl Responder, AppError> {
 
 pub async fn add_history(form: web::Form<AddHistory>) -> Result<impl Responder, AppError> {
     let input = form.input.clone();
-    let _ = db::add_history(input);
+    db::add_history(input)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())
 }
 
 pub async fn delete_history() -> Result<impl Responder, AppError> {
-    let _ = db::delete_history();
+    db::delete_history()?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())
