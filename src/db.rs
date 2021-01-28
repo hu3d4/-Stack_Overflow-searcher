@@ -22,7 +22,7 @@ pub fn add_history(input: String) -> Result<History, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn show_history() -> Vec<History> {
+pub fn show_history() -> Result<Vec<History>, AppError> {
     use crate::diesel::prelude::*;
     use crate::schema::history::dsl::*;
     let conn = establish_connection();
@@ -30,7 +30,7 @@ pub fn show_history() -> Vec<History> {
         .filter(done.eq(true))
         .limit(15)
         .load::<History>(&conn)
-        .expect("Error loading posts");
+        .map_err(|e| (AppError::DbError(e)));
 }
 
 pub fn delete_history() {
