@@ -22,15 +22,6 @@ pub fn add_history(input: String) -> Result<History, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
-// pub fn add_history(input: String) -> History {
-//     let history_entory = AddHistory { input };
-//     let conn = establish_connection();
-//     diesel::insert_into(history::table)
-//         .values(&history_entory)
-//         .get_result(&conn)
-//         .expect("Error saving new post")
-// }
-
 pub fn show_history() -> Vec<History> {
     use crate::diesel::prelude::*;
     use crate::schema::history::dsl::*;
