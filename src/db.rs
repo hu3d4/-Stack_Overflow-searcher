@@ -1,9 +1,9 @@
 use crate::errors::AppError;
 use crate::models::{AddHistory, History};
-use crate::schema::*;
+use crate::schema::history;
 
 use diesel::pg::PgConnection;
-use diesel::prelude::*;
+use diesel::prelude::{Connection, ExpressionMethods, QueryDsl, RunQueryDsl};
 use dotenv::dotenv;
 use std::env;
 
