@@ -13,7 +13,7 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .body(response_body))
 }
 
-pub async fn add_history(form: web::Form<AddHistory>) -> Result<impl Responder, Error> {
+pub async fn add_history(form: web::Form<AddHistory>) -> Result<impl Responder, AppError> {
     let input = form.input.clone();
     db::add_history(input);
     Ok(HttpResponse::SeeOther()
@@ -21,7 +21,7 @@ pub async fn add_history(form: web::Form<AddHistory>) -> Result<impl Responder, 
         .finish())
 }
 
-pub async fn delete_history() -> Result<impl Responder, Error> {
+pub async fn delete_history() -> Result<impl Responder, AppError> {
     db::delete_history();
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
