@@ -1,3 +1,4 @@
+use crate::errors::AppError;
 use crate::models::{AddHistory, History};
 use crate::schema::*;
 
@@ -12,14 +13,23 @@ pub fn establish_connection() -> PgConnection {
     PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn add_history(input: String) -> History {
+pub fn add_history(input: String) -> Result<History, AppError> {
     let history_entory = AddHistory { input };
     let conn = establish_connection();
-    diesel::insert_into(history::table)
+    return diesel::insert_into(history::table)
         .values(&history_entory)
         .get_result(&conn)
-        .expect("Error saving new post")
+        .map_err(|e| (AppError::DbError(e)));
 }
+
+// pub fn add_history(input: String) -> History {
+//     let history_entory = AddHistory { input };
+//     let conn = establish_connection();
+//     diesel::insert_into(history::table)
+//         .values(&history_entory)
+//         .get_result(&conn)
+//         .expect("Error saving new post")
+// }
 
 pub fn show_history() -> Vec<History> {
     use crate::diesel::prelude::*;
