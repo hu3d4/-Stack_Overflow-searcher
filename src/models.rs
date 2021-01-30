@@ -16,6 +16,12 @@ pub struct AddHistory {
     pub input: String,
 }
 
+#[derive(Insertable, Deserialize)]
+#[table_name = "history"]
+pub struct DeleteHistory {
+    pub id: i32,
+}
+
 #[derive(Template)]
 #[template(path = "search-form.html")]
 pub struct IndexTemplate {
