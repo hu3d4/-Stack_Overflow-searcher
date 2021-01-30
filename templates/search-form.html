@@ -34,7 +34,48 @@
         </form>
     </section>
 
+    <p class="border"></p>
+
+    <section class="history">
+        <ul class="history__area">
+            {% for entry in entries %}
+                <div class="history__group">
+                    <li class="history__item">{{ entry.input }}</li>
+                    <form class="history__form" id="DeleteHistory" action="/one_delete" method="post">
+                        <input type="text" size="31" name="id" value="{{ entry.id }}" style="display:none;" />
+                        <button class="search__button">Delete</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <script>
+        function addHistory() {
+            document.forms['addHistory'].submit();
+        }
+
+        function customSearch() {
+            let input_text = document.getElementById("input").value;
+            document.forms['customSearch'].elements['q'].value=input_text;
+            document.forms['customSearch'].submit();
+        }
+
+        function callAfter() {
+            let acc = [customSearch(), addHistory()]
+            while (acc.length > 0) {
+                acc.shift();
+            }
+        }
+    </script>
+
     <style>
+        .main {
+            width: 440px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
         .search {
             width: 370px;
             height: 29px;
@@ -63,26 +104,32 @@
             margin-left: auto;
             padding-top: 30px;
         }
+
+        .border {
+            border-bottom: 1px solid;
+            color: rgba(0, 0, 0, .1);
+        }
+
+        .history {
+        }
+
+        .history__area {
+            list-style: none;
+            padding-left: 0px;
+            position: relative;
+        }
+
+        .history__group {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 18px;
+        }
+
+        .history__item {
+            color: #950000;
+        }
     </style>
 
-    <script>
-        function addHistory() {
-            document.forms['addHistory'].submit();
-        }
-
-        function customSearch() {
-            let input_text = document.getElementById("input").value;
-            document.forms['customSearch'].elements['q'].value=input_text;
-            document.forms['customSearch'].submit();
-        }
-
-        function callAfter() {
-            let acc = [customSearch(), addHistory()]
-            while (acc.length > 0) {
-                acc.shift();
-            }
-        }
-    </script>
 </body>
 
 </html>
