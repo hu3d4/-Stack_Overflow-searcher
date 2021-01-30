@@ -1,4 +1,5 @@
 use crate::errors::AppError;
+use crate::models::DeleteHistory;
 use crate::models::{AddHistory, History};
 use crate::schema::history;
 
@@ -38,4 +39,14 @@ pub fn delete_history() -> Result<usize, AppError> {
     return diesel::delete(history::table.filter(history::id.gt(0)))
         .execute(&conn)
         .map_err(|e| (AppError::DbError(e)));
+}
+
+pub fn delete_one_history(id: i32) {
+    use crate::schema::history::dsl;
+    let delete_entory = DeleteHistory { id };
+    let result = &delete_entory.id;
+    let conn = establish_connection();
+    diesel::delete(dsl::history.filter(dsl::id.eq(result)))
+        .execute(&conn)
+        .expect("msg: &str");
 }
