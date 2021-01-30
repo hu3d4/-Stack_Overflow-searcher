@@ -41,12 +41,12 @@ pub fn delete_history() -> Result<usize, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn delete_one_history(id: i32) {
+pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
     use crate::schema::history::dsl;
     let delete_entory = DeleteHistory { id };
     let result = &delete_entory.id;
     let conn = establish_connection();
-    diesel::delete(dsl::history.filter(dsl::id.eq(result)))
+    return diesel::delete(dsl::history.filter(dsl::id.eq(result)))
         .execute(&conn)
-        .expect("msg: &str");
+        .map_err(|e| (AppError::DbError(e)));
 }
