@@ -34,7 +34,7 @@ pub fn show_history() -> Result<Vec<History>, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn delete_history() -> Result<usize, AppError> {
+pub fn delete_all_history() -> Result<usize, AppError> {
     let conn = establish_connection();
     return diesel::delete(history::table.filter(history::id.gt(0)))
         .execute(&conn)
