@@ -98,11 +98,6 @@ impl Drop for TestContext {
     }
 }
 
-#[test]
-fn try_it() {
-    let _ctx = TestContext::new();
-}
-
 struct TestContexts {
     base_url: String,
     db_name: String,
@@ -135,51 +130,57 @@ impl Drop for TestContexts {
             WHERE datname = '{}';",
             self.db_name
         );
-
         diesel::sql_query(disconnect_users.as_str())
             .execute(&conn)
             .unwrap();
-
         let query = diesel::sql_query(format!("DROP DATABASE {}", self.db_name).as_str());
         query
             .execute(&conn)
             .expect(&format!("Couldn't drop database {}", self.db_name));
     }
 }
+#[cfg(test)]
+mod tests {
+    use super::{Connection, History, PgConnection, RunQueryDsl, TestContext};
+    use pretty_assertions::assert_eq;
+    #[test]
+    fn try_it() {
+        let _ctx = TestContext::new();
+    }
 
-#[test]
-fn insert_user_test() {
-    // let _ctx = setup_database(
-    //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
-    //     "so_searcher",
-    // );
-    // DATABASE_URL=postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher
-    let conn = PgConnection::establish(&format!(
-        "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
-    ))
-    .unwrap();
-
-    // Now do your test.
-    diesel::sql_query("INSERT INTO users (input) VALUES ('text')")
-        .execute(&conn)
+    #[test]
+    fn insert_user_test() {
+        // let _ctx = setup_database(
+        //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
+        //     "so_searcher",
+        // );
+        // DATABASE_URL=postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher
+        let conn = PgConnection::establish(&format!(
+            "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
+        ))
         .unwrap();
-    let u = History::get_input_by_user(&conn, "text".to_string()).unwrap();
 
-    assert_eq!(u.input, "text".to_string());
+        // Now do your test.
+        diesel::sql_query("INSERT INTO users (input) VALUES ('text')")
+            .execute(&conn)
+            .unwrap();
+        let u = History::get_input_by_user(&conn, "text".to_string()).unwrap();
+
+        assert_eq!(u.input, "text".to_string());
+    }
+
+    #[test]
+    fn remove_user_test() {
+        // let _ctx = setup_database(
+        //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
+        //     "so_searcher",
+        // );
+        let conn = PgConnection::establish(&format!(
+            "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher",
+        ))
+        .unwrap();
+    }
 }
-
-#[test]
-fn remove_user_test() {
-    // let _ctx = setup_database(
-    //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
-    //     "so_searcher",
-    // );
-    let conn = PgConnection::establish(&format!(
-        "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher",
-    ))
-    .unwrap();
-}
-
 // #[cfg(test)]
 // mod tests {
 //     use super::{
