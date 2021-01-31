@@ -139,6 +139,7 @@ impl Drop for TestContexts {
             .expect(&format!("Couldn't drop database {}", self.db_name));
     }
 }
+
 #[cfg(test)]
 mod tests {
     use super::{Connection, History, PgConnection, RunQueryDsl, TestContext};
