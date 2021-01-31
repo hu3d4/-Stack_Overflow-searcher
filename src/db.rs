@@ -156,6 +156,7 @@ impl Drop for TestContexts {
 #[cfg(test)]
 mod tests {
     use super::{Connection, History, PgConnection, RunQueryDsl, TestContext};
+    use crate::embedded_migrations::setup_database;
     // use crate::db::establish_connection;
     use pretty_assertions::assert_eq;
     #[test]
@@ -165,10 +166,10 @@ mod tests {
 
     #[test]
     fn insert_user_test() {
-        // let _ctx = setup_database(
-        //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
-        //     "so_searcher",
-        // );
+        let _ctx = setup_database(
+            "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
+            "so_searcher",
+        );
         // DATABASE_URL=postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher
         // let conn = establish_connection();
         let conn = PgConnection::establish(&format!(
@@ -187,10 +188,10 @@ mod tests {
 
     #[test]
     fn remove_user_test() {
-        // let _ctx = setup_database(
-        //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
-        //     "so_searcher",
-        // );
+        let _ctx = setup_database(
+            "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
+            "so_searcher",
+        );
         // let conn = establish_connection();
         let conn = PgConnection::establish(&format!(
             "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher",
