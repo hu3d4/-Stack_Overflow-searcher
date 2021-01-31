@@ -53,7 +53,7 @@ pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
 
 use crate::diesel::OptionalExtension;
 
-impl AddHistory {
+impl History {
     pub fn get_input_by_user(conn: &PgConnection, input: String) -> Option<History> {
         use crate::schema::history::dsl::*;
         history
@@ -66,8 +66,16 @@ impl AddHistory {
 
 struct TestContext {}
 
+// struct TestContext {
+//     base_url: String,
+//     db_name: String,
+// }
+
 impl TestContext {
     fn new() -> Self {
+        let conn = PgConnection::establish(&format!("{}/{}", base_url, db_name))
+            .expect(&format!("Cannot connect to {} database", db_name));
+        embedded_migrations::run(&conn);
         println!("Set up resources");
         Self {}
     }
@@ -126,6 +134,39 @@ impl Drop for TestContexts {
             .execute(&conn)
             .expect(&format!("Couldn't drop database {}", self.db_name));
     }
+}
+
+#[test]
+fn insert_user_test() {
+    let _ctx = setup_database(
+        "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
+        "so_searcher",
+    );
+    // DATABASE_URL=postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher
+    let conn = PgConnection::establish(&format!(
+        "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
+    ))
+    .unwrap();
+
+    // Now do your test.
+    diesel::sql_query("INSERT INTO users (input) VALUES ('text')")
+        .execute(&conn)
+        .unwrap();
+    let u = History::get_input_by_user(&conn, "MAIL".to_string()).unwrap();
+
+    assert_eq!(u.input, "NAME".to_string());
+}
+
+#[test]
+fn remove_user_test() {
+    let _ctx = setup_database(
+        "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
+        "so_searcher",
+    );
+    let conn = PgConnection::establish(&format!(
+        "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher",
+    ))
+    .unwrap();
 }
 
 // #[cfg(test)]
