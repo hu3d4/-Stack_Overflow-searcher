@@ -3,7 +3,7 @@ use crate::schema::history;
 use askama::Template;
 use serde::Deserialize;
 
-#[derive(Queryable)]
+#[derive(Debug, Queryable)]
 pub struct History {
     pub id: i32,
     pub input: String,
