@@ -9,7 +9,20 @@ use actix_web::{web, App, HttpServer};
 
 #[macro_use]
 extern crate diesel;
+extern crate diesel_migrations;
 extern crate dotenv;
+
+use diesel_migrations::embed_migrations;
+
+embed_migrations!("../migrations");
+
+fn maidn() {
+    use crate::db::establish_connection;
+    let connection = establish_connection();
+
+    // This will run the necessary migrations.
+    embedded_migrations::run(&connection);
+}
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
