@@ -73,9 +73,14 @@ struct TestContext {}
 
 impl TestContext {
     fn new() -> Self {
-        use crate::embedded_migrations;
+        // use crate::embedded_migrations;
+        // use diesel_migrations::embed_migrations;
+        embed_migrations!("migrations/");
+
+        dotenv().ok();
         let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
 
+        // let conn = establish_connection();
         let conn = PgConnection::establish(&database_url)
             .expect(&format!("Error connecting to {}", database_url));
         embedded_migrations::run(&conn);
@@ -105,9 +110,14 @@ struct TestContexts {
 
 impl TestContexts {
     fn new(base_url: &str, db_name: &str) -> Self {
-        let postgres_url = format!("{}/so_searcher", base_url);
-        let conn =
-            PgConnection::establish(&postgres_url).expect("Cannot connect to postgres database.");
+        // let postgres_url = format!("{}/so_searcher", base_url);
+        // let conn = establish_connection();
+        dotenv().ok();
+        let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+        let conn = PgConnection::establish(&database_url)
+            .expect(&format!("Error connecting to {}", database_url));
+        // let conn =
+        //     PgConnection::establish(&postgres_url).expect("Cannot connect to postgres database.");
         let query = diesel::sql_query(format!("CREATE DATABASE {}", db_name).as_str());
         query
             .execute(&conn)
@@ -121,9 +131,12 @@ impl TestContexts {
 
 impl Drop for TestContexts {
     fn drop(&mut self) {
-        let postgres_url = format!("{}/so_searcher", self.base_url);
-        let conn =
-            PgConnection::establish(&postgres_url).expect("Cannot connect to postgres database.");
+        // let postgres_url = format!("{}/so_searcher", self.base_url);
+        // let conn = establish_connection();
+        dotenv().ok();
+        let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+        let conn = PgConnection::establish(&database_url)
+            .expect(&format!("Error connecting to {}", database_url));
         let disconnect_users = format!(
             "SELECT pg_terminate_backend(pid)
             FROM pg_stat_activity
@@ -143,6 +156,7 @@ impl Drop for TestContexts {
 #[cfg(test)]
 mod tests {
     use super::{Connection, History, PgConnection, RunQueryDsl, TestContext};
+    // use crate::db::establish_connection;
     use pretty_assertions::assert_eq;
     #[test]
     fn try_it() {
@@ -156,6 +170,7 @@ mod tests {
         //     "so_searcher",
         // );
         // DATABASE_URL=postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher
+        // let conn = establish_connection();
         let conn = PgConnection::establish(&format!(
             "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
         ))
@@ -176,6 +191,7 @@ mod tests {
         //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
         //     "so_searcher",
         // );
+        // let conn = establish_connection();
         let conn = PgConnection::establish(&format!(
             "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher",
         ))
