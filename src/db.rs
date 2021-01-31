@@ -54,10 +54,10 @@ pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
 use crate::diesel::OptionalExtension;
 
 impl History {
-    pub fn get_input_by_user(conn: &PgConnection, input: String) -> Option<History> {
+    pub fn get_input_by_user(conn: &PgConnection, inputs: String) -> Option<History> {
         use crate::schema::history::dsl::*;
         history
-            .filter(input.eq(input))
+            .filter(input.eq(inputs))
             .first(conn)
             .optional()
             .unwrap()
@@ -73,12 +73,23 @@ struct TestContext {}
 
 impl TestContext {
     fn new() -> Self {
-        let conn = PgConnection::establish(&format!("{}/{}", base_url, db_name))
-            .expect(&format!("Cannot connect to {} database", db_name));
+        use crate::embedded_migrations;
+        let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+
+        let conn = PgConnection::establish(&database_url)
+            .expect(&format!("Error connecting to {}", database_url));
         embedded_migrations::run(&conn);
         println!("Set up resources");
         Self {}
     }
+
+    // fn new() -> Self {
+    //     let conn = PgConnection::establish(&format!("{}/{}", base_url, db_name))
+    //         .expect(&format!("Cannot connect to {} database", db_name));
+    //     embedded_migrations::run(&conn);
+    //     println!("Set up resources");
+    //     Self {}
+    // }
 }
 
 impl Drop for TestContext {
@@ -138,10 +149,10 @@ impl Drop for TestContexts {
 
 #[test]
 fn insert_user_test() {
-    let _ctx = setup_database(
-        "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
-        "so_searcher",
-    );
+    // let _ctx = setup_database(
+    //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
+    //     "so_searcher",
+    // );
     // DATABASE_URL=postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher
     let conn = PgConnection::establish(&format!(
         "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
@@ -152,17 +163,17 @@ fn insert_user_test() {
     diesel::sql_query("INSERT INTO users (input) VALUES ('text')")
         .execute(&conn)
         .unwrap();
-    let u = History::get_input_by_user(&conn, "MAIL".to_string()).unwrap();
+    let u = History::get_input_by_user(&conn, "text".to_string()).unwrap();
 
-    assert_eq!(u.input, "NAME".to_string());
+    assert_eq!(u.input, "text".to_string());
 }
 
 #[test]
 fn remove_user_test() {
-    let _ctx = setup_database(
-        "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
-        "so_searcher",
-    );
+    // let _ctx = setup_database(
+    //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
+    //     "so_searcher",
+    // );
     let conn = PgConnection::establish(&format!(
         "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher",
     ))
