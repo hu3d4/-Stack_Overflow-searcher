@@ -133,6 +133,7 @@ impl Drop for TestContext {
 #[cfg(test)]
 mod tests {
     use super::{Connection, History, PgConnection, RunQueryDsl, TestMigration};
+    use crate::db::*;
     use pretty_assertions::assert_eq;
 
     #[test]
@@ -141,7 +142,7 @@ mod tests {
     }
 
     #[test]
-    fn insert_user_test() {
+    fn add_history_test() {
         let conn = PgConnection::establish(&format!(
             "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
         ))
@@ -150,10 +151,44 @@ mod tests {
         diesel::sql_query("INSERT INTO history (input) VALUES ('text')")
             .execute(&conn)
             .unwrap();
-        let u = History::_get_input_by_user(&conn, "text".to_string()).unwrap();
+        let u = add_history("text".to_string()).unwrap();
 
         assert_eq!(u.input, "text".to_string());
     }
+
+    #[test]
+    fn delete_all_history_test() {
+        let conn = PgConnection::establish(&format!(
+            "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
+        ))
+        .unwrap();
+        diesel::sql_query("INSERT INTO history (input) VALUES ('text')")
+            .execute(&conn)
+            .unwrap();
+        let u = delete_all_history();
+        assert_eq!(u, "text".to_string());
+    }
+    // #[test]
+    // fn insert_user_test() {
+    //     let conn = PgConnection::establish(&format!(
+    //         "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
+    //     ))
+    //     .unwrap();
+
+    //     diesel::sql_query("INSERT INTO history (input) VALUES ('text')")
+    //         .execute(&conn)
+    //         .unwrap();
+    //     let u = History::_get_input_by_user(&conn, "text".to_string()).unwrap();
+
+    //     assert_eq!(u.input, "text".to_string());
+    // }
+
+    // pub fn delete_all_history() -> Result<usize, AppError> {
+    //     let conn = establish_connection();
+    //     return diesel::delete(history::table.filter(history::id.gt(0)))
+    //         .execute(&conn)
+    //         .map_err(|e| (AppError::DbError(e)));
+    // }
 
     #[test]
     fn remove_user_test() {
