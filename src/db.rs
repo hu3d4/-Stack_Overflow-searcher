@@ -66,35 +66,19 @@ impl History {
 
 struct TestContext {}
 
-// struct TestContext {
-//     base_url: String,
-//     db_name: String,
-// }
-
 impl TestContext {
     fn new() -> Self {
-        // use crate::embedded_migrations;
-        // use diesel_migrations::embed_migrations;
-        embed_migrations!("migrations/");
+        embed_migrations!("migrations");
 
         dotenv().ok();
         let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
 
-        // let conn = establish_connection();
         let conn = PgConnection::establish(&database_url)
             .expect(&format!("Error connecting to {}", database_url));
-        embedded_migrations::run(&conn);
+        embedded_migrations::run_with_output(&conn, &mut std::io::stdout());
         println!("Set up resources");
         Self {}
     }
-
-    // fn new() -> Self {
-    //     let conn = PgConnection::establish(&format!("{}/{}", base_url, db_name))
-    //         .expect(&format!("Cannot connect to {} database", db_name));
-    //     embedded_migrations::run(&conn);
-    //     println!("Set up resources");
-    //     Self {}
-    // }
 }
 
 impl Drop for TestContext {
@@ -110,14 +94,10 @@ struct TestContexts {
 
 impl TestContexts {
     fn new(base_url: &str, db_name: &str) -> Self {
-        // let postgres_url = format!("{}/so_searcher", base_url);
-        // let conn = establish_connection();
         dotenv().ok();
         let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
         let conn = PgConnection::establish(&database_url)
             .expect(&format!("Error connecting to {}", database_url));
-        // let conn =
-        //     PgConnection::establish(&postgres_url).expect("Cannot connect to postgres database.");
         let query = diesel::sql_query(format!("CREATE DATABASE {}", db_name).as_str());
         query
             .execute(&conn)
@@ -131,8 +111,6 @@ impl TestContexts {
 
 impl Drop for TestContexts {
     fn drop(&mut self) {
-        // let postgres_url = format!("{}/so_searcher", self.base_url);
-        // let conn = establish_connection();
         dotenv().ok();
         let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
         let conn = PgConnection::establish(&database_url)
@@ -156,8 +134,7 @@ impl Drop for TestContexts {
 #[cfg(test)]
 mod tests {
     use super::{Connection, History, PgConnection, RunQueryDsl, TestContext};
-    use crate::embedded_migrations::setup_database;
-    // use crate::db::establish_connection;
+    // use crate::embedded_migrations::setup_database;
     use pretty_assertions::assert_eq;
     #[test]
     fn try_it() {
@@ -166,18 +143,15 @@ mod tests {
 
     #[test]
     fn insert_user_test() {
-        let _ctx = setup_database(
-            "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
-            "so_searcher",
-        );
-        // DATABASE_URL=postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher
-        // let conn = establish_connection();
+        // let _ctx = setup_database(
+        //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
+        //     "so_searcher",
+        // );
         let conn = PgConnection::establish(&format!(
             "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
         ))
         .unwrap();
 
-        // Now do your test.
         diesel::sql_query("INSERT INTO users (input) VALUES ('text')")
             .execute(&conn)
             .unwrap();
@@ -188,50 +162,13 @@ mod tests {
 
     #[test]
     fn remove_user_test() {
-        let _ctx = setup_database(
-            "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
-            "so_searcher",
-        );
-        // let conn = establish_connection();
+        // let _ctx = setup_database(
+        //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
+        //     "so_searcher",
+        // );
         let conn = PgConnection::establish(&format!(
             "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher",
         ))
         .unwrap();
     }
 }
-// #[cfg(test)]
-// mod tests {
-//     use super::{
-//         establish_connection, AddHistory, Connection, PgConnection, RunQueryDsl, TestContext,
-//     };
-//     use pretty_assertions::assert_eq;
-//     #[test]
-//     fn try_it() {
-//         let _ctx = TestContext::new();
-//     }
-//     #[test]
-//     fn insert_user_test() {
-//         use diesel_migrations::setup_database;
-//         let _ctx = setup_database(&establish_connection());
-
-//         diesel::sql_query("INSERT INTO users (input) VALUES ('input text')")
-//             .execute(&establish_connection())
-//             .unwrap();
-//         let u = AddHistory::get_input_by_user(&establish_connection(), "input text".to_string())
-//             .unwrap();
-
-//         assert_eq!(u.input, "input text".to_string());
-//     }
-
-//     #[test]
-//     fn remove_user_test() {
-//         use diesel_migrations::setup_database;
-
-//         let _ctx = setup_database(&establish_connection());
-
-//         let conn = PgConnection::establish(&format!(
-//             "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
-//         ))
-//         .unwrap();
-//     }
-// }
