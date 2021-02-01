@@ -11,12 +11,6 @@ use actix_web::{web, App, HttpServer};
 extern crate diesel;
 extern crate dotenv;
 
-#[macro_use]
-extern crate diesel_migrations;
-use diesel_migrations::embed_migrations;
-
-embed_migrations!("migrations/");
-
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
