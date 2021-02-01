@@ -156,18 +156,6 @@ mod tests {
         assert_eq!(u.input, "text".to_string());
     }
 
-    #[test]
-    fn delete_all_history_test() {
-        let conn = PgConnection::establish(&format!(
-            "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
-        ))
-        .unwrap();
-        diesel::sql_query("INSERT INTO history (input) VALUES ('text')")
-            .execute(&conn)
-            .unwrap();
-        let u = delete_all_history();
-        assert_eq!(u, "text".to_string());
-    }
     // #[test]
     // fn insert_user_test() {
     //     let conn = PgConnection::establish(&format!(
