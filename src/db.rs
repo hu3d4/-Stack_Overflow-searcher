@@ -1,3 +1,4 @@
+use crate::diesel::OptionalExtension;
 use crate::errors::AppError;
 use crate::models::DeleteHistory;
 use crate::models::{AddHistory, History};
@@ -50,8 +51,6 @@ pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
         .execute(&conn)
         .map_err(|e| (AppError::DbError(e)));
 }
-
-use crate::diesel::OptionalExtension;
 
 impl History {
     pub fn _get_input_by_user(conn: &PgConnection, inputs: String) -> Option<History> {
