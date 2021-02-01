@@ -63,9 +63,9 @@ impl History {
     }
 }
 
-struct TestContext {}
+struct TestMigration {}
 
-impl TestContext {
+impl TestMigration {
     fn _new() -> Self {
         embed_migrations!("migrations");
 
@@ -80,18 +80,18 @@ impl TestContext {
     }
 }
 
-impl Drop for TestContext {
+impl Drop for TestMigration {
     fn drop(&mut self) {
         println!("Clean up resources");
     }
 }
 
-struct TestContexts {
+struct TestContext {
     _base_url: String,
     _db_name: String,
 }
 
-impl TestContexts {
+impl TestContext {
     fn _new(base_url: &str, db_name: &str) -> Self {
         dotenv().ok();
         let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
@@ -108,7 +108,7 @@ impl TestContexts {
     }
 }
 
-impl Drop for TestContexts {
+impl Drop for TestContext {
     fn drop(&mut self) {
         dotenv().ok();
         let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
@@ -132,12 +132,12 @@ impl Drop for TestContexts {
 
 #[cfg(test)]
 mod tests {
-    use super::{Connection, History, PgConnection, RunQueryDsl, TestContext};
+    use super::{Connection, History, PgConnection, RunQueryDsl, TestMigration};
     use pretty_assertions::assert_eq;
 
     #[test]
     fn try_it() {
-        let _ctx = TestContext::_new();
+        let _ctx = TestMigration::_new();
     }
 
     #[test]
