@@ -153,7 +153,7 @@ mod tests {
         ))
         .unwrap();
 
-        diesel::sql_query("INSERT INTO users (input) VALUES ('text')")
+        diesel::sql_query("INSERT INTO history (input) VALUES ('text')")
             .execute(&conn)
             .unwrap();
         let u = History::_get_input_by_user(&conn, "text".to_string()).unwrap();
