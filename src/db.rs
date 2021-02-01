@@ -54,7 +54,7 @@ pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
 use crate::diesel::OptionalExtension;
 
 impl History {
-    pub fn get_input_by_user(conn: &PgConnection, inputs: String) -> Option<History> {
+    pub fn _get_input_by_user(conn: &PgConnection, inputs: String) -> Option<History> {
         use crate::schema::history::dsl::*;
         history
             .filter(input.eq(inputs))
@@ -67,7 +67,7 @@ impl History {
 struct TestContext {}
 
 impl TestContext {
-    fn new() -> Self {
+    fn _new() -> Self {
         embed_migrations!("migrations");
 
         dotenv().ok();
@@ -88,12 +88,12 @@ impl Drop for TestContext {
 }
 
 struct TestContexts {
-    base_url: String,
-    db_name: String,
+    _base_url: String,
+    _db_name: String,
 }
 
 impl TestContexts {
-    fn new(base_url: &str, db_name: &str) -> Self {
+    fn _new(base_url: &str, db_name: &str) -> Self {
         dotenv().ok();
         let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
         let conn = PgConnection::establish(&database_url)
@@ -103,8 +103,8 @@ impl TestContexts {
             .execute(&conn)
             .expect(format!("Could not create database {}", db_name).as_str());
         Self {
-            base_url: base_url.to_string(),
-            db_name: db_name.to_string(),
+            _base_url: base_url.to_string(),
+            _db_name: db_name.to_string(),
         }
     }
 }
@@ -119,15 +119,15 @@ impl Drop for TestContexts {
             "SELECT pg_terminate_backend(pid)
             FROM pg_stat_activity
             WHERE datname = '{}';",
-            self.db_name
+            self._db_name
         );
         diesel::sql_query(disconnect_users.as_str())
             .execute(&conn)
             .unwrap();
-        let query = diesel::sql_query(format!("DROP DATABASE {}", self.db_name).as_str());
+        let query = diesel::sql_query(format!("DROP DATABASE {}", self._db_name).as_str());
         query
             .execute(&conn)
-            .expect(&format!("Couldn't drop database {}", self.db_name));
+            .expect(&format!("Couldn't drop database {}", self._db_name));
     }
 }
 
@@ -136,9 +136,10 @@ mod tests {
     use super::{Connection, History, PgConnection, RunQueryDsl, TestContext};
     // use crate::embedded_migrations::setup_database;
     use pretty_assertions::assert_eq;
+
     #[test]
     fn try_it() {
-        let _ctx = TestContext::new();
+        let _ctx = TestContext::_new();
     }
 
     #[test]
@@ -155,7 +156,7 @@ mod tests {
         diesel::sql_query("INSERT INTO users (input) VALUES ('text')")
             .execute(&conn)
             .unwrap();
-        let u = History::get_input_by_user(&conn, "text".to_string()).unwrap();
+        let u = History::_get_input_by_user(&conn, "text".to_string()).unwrap();
 
         assert_eq!(u.input, "text".to_string());
     }
@@ -166,7 +167,7 @@ mod tests {
         //     "postgres://so_searcher:so_searcher_password@0.0.0.0:5433",
         //     "so_searcher",
         // );
-        let conn = PgConnection::establish(&format!(
+        let _conn = PgConnection::establish(&format!(
             "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher",
         ))
         .unwrap();
