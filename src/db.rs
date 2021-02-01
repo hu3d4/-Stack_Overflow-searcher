@@ -75,7 +75,7 @@ impl TestContext {
 
         let conn = PgConnection::establish(&database_url)
             .expect(&format!("Error connecting to {}", database_url));
-        embedded_migrations::run_with_output(&conn, &mut std::io::stdout());
+        embedded_migrations::run(&conn).unwrap();
         println!("Set up resources");
         Self {}
     }
