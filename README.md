@@ -2,6 +2,9 @@
 
 Stack Overflow searcherは検索ボックスに入力された文字列をGoogle検索し、そこからStack Overflowのサイトだけを抽出して表示します。
 
+普通にGoogleで検索するとSEOの強い記事がヒットして、本当にほしい情報を見つけることが大変なときがあります。
+そんなときにこれを使えば英語のStack Overflowのサイトだけを表示してくれるのでプログラミング学習を円滑に進めることがきでます。
+
 ![Screenshot_2021-02-02 Stack Overflow Searcher](https://user-images.githubusercontent.com/66501033/106546800-52bef480-654f-11eb-9960-a57a4749a832.png)
 
 
