@@ -24,7 +24,9 @@ services:
       - postgres
 
   nginx:
-    image: nginx:1.19.6
+    build: 
+      context: .
+      dockerfile: docker/rust/Dockerfile
     ports:
       - "80:80"
     volumes:
