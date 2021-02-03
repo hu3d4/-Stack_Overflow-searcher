@@ -23,7 +23,7 @@ pub struct DeleteHistory {
 }
 
 #[derive(Template)]
-#[template(path = "search-form.html")]
+#[template(path = "index.html")]
 pub struct IndexTemplate {
     pub entries: Vec<History>,
 }
