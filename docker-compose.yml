@@ -15,7 +15,9 @@ services:
       POSTGRES_DB: so_searcher
 
   rust:
-    image: rust:1.49-alpine3.11
+    build:
+      context: .
+      dockerfile: docker/rust/Dockerfile
     container_name: diesel_rust
     restart: always
     volumes:
@@ -24,9 +26,7 @@ services:
       - postgres
 
   nginx:
-    build: 
-      context: .
-      dockerfile: docker/rust/Dockerfile
+    image: nginx:1.19.6
     ports:
       - "80:80"
     volumes:
