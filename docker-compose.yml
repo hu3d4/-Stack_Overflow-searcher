@@ -24,3 +24,10 @@ services:
       - ./:/so_searcher
     depends_on: 
       - postgres
+
+  nginx:
+    image: nginx:1.19.6
+    ports:
+      - "80:80"
+    volumes:
+      - ./templates:/usr/share/nginx/html
