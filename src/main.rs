@@ -20,7 +20,7 @@ async fn main() -> std::io::Result<()> {
             .route("/delete", web::post().to(delete_history))
             .route("/delete_one", web::post().to(delete_one_history))
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(("127.0.0.1", 80))?
     .run()
     .await
 }
