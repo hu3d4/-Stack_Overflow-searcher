@@ -1,0 +1,11 @@
+/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/x86_64-unknown-linux-musl/release/deps/socket2-0e978ad607b0a7f3.rmeta: /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/lib.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/sockaddr.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/socket.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/utils.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/sys/unix.rs
+
+/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/x86_64-unknown-linux-musl/release/deps/libsocket2-0e978ad607b0a7f3.rlib: /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/lib.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/sockaddr.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/socket.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/utils.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/sys/unix.rs
+
+/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/x86_64-unknown-linux-musl/release/deps/socket2-0e978ad607b0a7f3.d: /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/lib.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/sockaddr.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/socket.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/utils.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/sys/unix.rs
+
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/lib.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/sockaddr.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/socket.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/utils.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/socket2-0.3.19/src/sys/unix.rs:
