@@ -1,0 +1,13 @@
+/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/debug/deps/url-da4e579237ce7abc.rmeta: /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/lib.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/host.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/origin.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/parser.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/path_segments.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/slicing.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/quirks.rs
+
+/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/debug/deps/liburl-da4e579237ce7abc.rlib: /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/lib.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/host.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/origin.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/parser.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/path_segments.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/slicing.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/quirks.rs
+
+/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/debug/deps/url-da4e579237ce7abc.d: /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/lib.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/host.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/origin.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/parser.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/path_segments.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/slicing.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/quirks.rs
+
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/lib.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/host.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/origin.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/parser.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/path_segments.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/slicing.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/url-2.2.0/src/quirks.rs:
