@@ -21,6 +21,8 @@ services:
     container_name: diesel_rust
     restart: always
     volumes:
-      - ./:/so_searcher
+      - ./:/stack_overflow_searcher
     depends_on: 
       - postgres
+    ports: 
+      - 8080:8080
