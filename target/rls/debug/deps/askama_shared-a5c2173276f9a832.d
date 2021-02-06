@@ -1,0 +1,12 @@
+/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/rls/debug/deps/askama_shared-a5c2173276f9a832.rmeta: /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/lib.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/error.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/filters/mod.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/generator.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/helpers/mod.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/heritage.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/input.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/parser.rs
+
+/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/rls/debug/deps/askama_shared-a5c2173276f9a832.d: /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/lib.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/error.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/filters/mod.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/generator.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/helpers/mod.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/heritage.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/input.rs /home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/parser.rs
+
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/lib.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/error.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/filters/mod.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/generator.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/helpers/mod.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/heritage.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/input.rs:
+/home/haruka/.cargo/registry/src/github.com-1ecc6299db9ec823/askama_shared-0.11.1/src/parser.rs:

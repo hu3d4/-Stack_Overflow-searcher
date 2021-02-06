@@ -1,2 +1,0 @@
-cargo:rustc-env=TYPENUM_BUILD_CONSTS=/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/x86_64-unknown-linux-musl/release/build/typenum-0fdcc003e8845274/out/consts.rs
-cargo:rustc-env=TYPENUM_BUILD_OP=/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/x86_64-unknown-linux-musl/release/build/typenum-0fdcc003e8845274/out/op.rs

@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/release/build/typenum-b95a35bf31c23155/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/home/haruka/Dev/Projects/Rust/stack_overflow_searcher/target/release/build/typenum-b95a35bf31c23155/out/op.rs
