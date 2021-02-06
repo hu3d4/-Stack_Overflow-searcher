@@ -11,4 +11,4 @@ COPY . .
 RUN cargo build --release
 RUN cargo install --path .
 
-CMD ["so_searcher"]
+CMD [ "cargo", "run", "so_searcher" ]
