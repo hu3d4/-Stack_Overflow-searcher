@@ -13,12 +13,3 @@ services:
       POSTGRES_PASSWORD: so_searcher_password
       POSTGRES_USER: so_searcher
       POSTGRES_DB: so_searcher
-
-  rust:
-    image: rust:1.49-alpine3.11
-    container_name: diesel_rust
-    restart: always
-    volumes:
-      - ./:/so_searcher
-    depends_on: 
-      - postgres
