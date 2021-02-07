@@ -15,7 +15,7 @@ services:
       POSTGRES_DB: so_searcher
 
   rust:
-    build: .
+    image: rust:1.49-alpine3.11
     container_name: diesel_rust
     restart: always
     volumes:
