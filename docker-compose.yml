@@ -22,5 +22,3 @@ services:
       - ./:/so_searcher
     depends_on: 
       - postgres
-    # ports: 
-    #   - 8080:8080
