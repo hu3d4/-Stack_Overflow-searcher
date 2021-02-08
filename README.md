@@ -16,7 +16,13 @@ Stack Overflow searcherは検索ボックスに入力された文字列をGoogle
 # 使用技術
 * Rust 1.49
 * actix-web 3.3.2
-* Docker-compose
+* Diesel 1.4.1
+* PostgreSQL 13.1
+* Docker-compose 1.28.2
+* AWS
+    * VPC
+    * EC2
+* Programmable Search Engine by Google
 
 # 機能一覧
 * 検索機能
