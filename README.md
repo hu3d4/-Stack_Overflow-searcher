@@ -11,6 +11,13 @@ Stack Overflow searcherは検索ボックスに入力された文字列をGoogle
 
 ![Screenshot_2021-02-02 Programmable Search Engine](https://user-images.githubusercontent.com/66501033/106545995-c3651180-654d-11eb-8bf5-7dd72a642b88.png)
 
+# 機能一覧
+* 検索機能
+* 検索履歴の保存
+* 履歴からの補完機能
+* 履歴一括削除
+* 特定の履歴を一つだけ削除する機能
+
 # 使用技術
 * Rust 1.49
 * actix-web 3.3.2
@@ -21,10 +28,3 @@ Stack Overflow searcherは検索ボックスに入力された文字列をGoogle
     * VPC
     * EC2
 * Programmable Search Engine by Google
-
-# 機能一覧
-* 検索機能
-* 検索履歴の保存
-* 履歴からの補完機能
-* 履歴一括削除
-* 特定の履歴を一つだけ削除する機能
