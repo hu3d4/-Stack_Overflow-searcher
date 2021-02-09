@@ -10,6 +10,13 @@ pub struct History {
     pub done: bool,
 }
 
+#[derive(Debug, Queryable)]
+pub struct User {
+    pub id: i32,
+    pub email: String,
+    pub pw: String,
+}
+
 #[derive(Insertable, Deserialize)]
 #[table_name = "history"]
 pub struct AddHistory {
