@@ -1,7 +1,6 @@
 use crate::db;
 use crate::errors::AppError;
-use crate::models::DeleteHistory;
-use crate::models::{AddHistory, IndexTemplate};
+use crate::models::*;
 use actix_web::{http::header, web, HttpResponse, Responder};
 use askama::Template;
 
@@ -34,6 +33,18 @@ pub async fn delete_one_history(
 ) -> Result<impl Responder, AppError> {
     let id = form.id;
     db::delete_one_history(id)?;
+    Ok(HttpResponse::SeeOther()
+        .header(header::LOCATION, "/")
+        .finish())
+}
+
+pub async fn add_user(form: web::Form<NewUser>) -> Result<impl Responder, AppError> {
+    // let a = NewUser {
+    //     id: 5,
+    //     email: "email@example.com".to_string(),
+    //     pw: "password".to_string(),
+    // };
+    db::add_user(&form)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())
