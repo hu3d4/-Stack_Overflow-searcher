@@ -51,6 +51,18 @@
         </ul>
     </section>
 
+    <form action="/add_user" method="POST">
+        <div>
+            <label for="email">E-mail:</label>
+            <input type="email" name="email">
+        </div>
+        <div>
+            <label for="pw">password:</label>
+            <input type="pw" name="pw">
+        </div>
+        <input type="submit" value="Sign Up">
+    </form>
+
     <script>
         function addHistory() {
             document.forms['addHistory'].submit();
@@ -113,8 +125,6 @@
             border-bottom: 1px solid;
             color: rgba(0, 0, 0, .1);
         }
-
-        .history {}
 
         .history__area {
             list-style: none;
