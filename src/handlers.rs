@@ -14,8 +14,7 @@ pub async fn index() -> Result<impl Responder, AppError> {
 }
 
 pub async fn add_history(form: web::Form<AddHistory>) -> Result<impl Responder, AppError> {
-    let input = form.input.clone();
-    db::add_history(input)?;
+    db::add_history(&form)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())
