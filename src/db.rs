@@ -1,6 +1,5 @@
 use crate::errors::AppError;
-use crate::models::DeleteHistory;
-use crate::models::{AddHistory, History};
+use crate::models::*;
 use crate::schema::histories;
 
 use diesel::pg::PgConnection;
