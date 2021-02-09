@@ -1,6 +1,6 @@
 use crate::errors::AppError;
 use crate::models::*;
-use crate::schema::histories;
+use crate::schema::*;
 
 use diesel::pg::PgConnection;
 use diesel::prelude::{Connection, ExpressionMethods, QueryDsl, RunQueryDsl};
@@ -47,6 +47,19 @@ pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
     let conn = establish_connection();
     return diesel::delete(dsl::histories.filter(dsl::id.eq(result)))
         .execute(&conn)
+        .map_err(|e| (AppError::DbError(e)));
+}
+
+pub fn add_user(user: &NewUser) -> std::result::Result<User, AppError> {
+    // let a = NewUser {
+    //     id: result,
+    //     email: result2,
+    //     pw: result3,
+    // };
+    let conn = establish_connection();
+    return diesel::insert_into(users::table)
+        .values(user)
+        .get_result(&conn)
         .map_err(|e| (AppError::DbError(e)));
 }
 
