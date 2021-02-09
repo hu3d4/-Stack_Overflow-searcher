@@ -39,11 +39,6 @@ pub async fn delete_one_history(
 }
 
 pub async fn add_user(form: web::Form<NewUser>) -> Result<impl Responder, AppError> {
-    // let a = NewUser {
-    //     id: 5,
-    //     email: "email@example.com".to_string(),
-    //     pw: "password".to_string(),
-    // };
     db::add_user(&form)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
