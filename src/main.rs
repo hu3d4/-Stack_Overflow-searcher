@@ -21,6 +21,7 @@ async fn main() -> std::io::Result<()> {
             .route("/get", web::post().to(add_history))
             .route("/delete", web::post().to(delete_history))
             .route("/delete_one", web::post().to(delete_one_history))
+            .route("/add_user", web::post().to(add_user))
     })
     .listen(listener)?
     .run()
