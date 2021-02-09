@@ -57,25 +57,3 @@ pub fn add_user(user: &NewUser) -> std::result::Result<User, AppError> {
         .get_result(&conn)
         .map_err(|e| (AppError::DbError(e)));
 }
-
-#[cfg(test)]
-mod tests {
-    use super::{Connection, PgConnection, RunQueryDsl};
-    use crate::db::add_history;
-    use pretty_assertions::assert_eq;
-
-    #[test]
-    fn add_history_test() {
-        let conn = PgConnection::establish(&format!(
-            "postgres://so_searcher:so_searcher_password@0.0.0.0:5433/so_searcher"
-        ))
-        .unwrap();
-
-        diesel::sql_query("INSERT INTO history (input) VALUES ('text')")
-            .execute(&conn)
-            .unwrap();
-        let u = add_history("text".to_string()).unwrap();
-
-        assert_eq!(u.input, "text".to_string());
-    }
-}
