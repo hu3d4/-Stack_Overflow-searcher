@@ -51,11 +51,6 @@ pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
 }
 
 pub fn add_user(user: &NewUser) -> std::result::Result<User, AppError> {
-    // let a = NewUser {
-    //     id: result,
-    //     email: result2,
-    //     pw: result3,
-    // };
     let conn = establish_connection();
     return diesel::insert_into(users::table)
         .values(user)
