@@ -20,7 +20,7 @@ pub struct User {
 
 #[derive(Insertable, Deserialize)]
 #[table_name = "users"]
-pub struct NewUser {
+pub struct AddUser {
     pub email: String,
     pub pw: String,
 }
