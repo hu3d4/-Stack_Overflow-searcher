@@ -42,6 +42,13 @@ pub async fn add_history(form: web::Form<AddHistory>) -> Result<impl Responder, 
         .finish())
 }
 
+pub async fn add_user(form: web::Form<AddUser>) -> Result<impl Responder, AppError> {
+    db::add_user(&form)?;
+    Ok(HttpResponse::SeeOther()
+        .header(header::LOCATION, "/")
+        .finish())
+}
+
 pub async fn delete_history() -> Result<impl Responder, AppError> {
     db::delete_all_history()?;
     Ok(HttpResponse::SeeOther()
@@ -54,13 +61,6 @@ pub async fn delete_one_history(
 ) -> Result<impl Responder, AppError> {
     let id = form.id;
     db::delete_one_history(id)?;
-    Ok(HttpResponse::SeeOther()
-        .header(header::LOCATION, "/")
-        .finish())
-}
-
-pub async fn add_user(form: web::Form<NewUser>) -> Result<impl Responder, AppError> {
-    db::add_user(&form)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())
