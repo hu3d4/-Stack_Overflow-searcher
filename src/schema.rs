@@ -11,6 +11,7 @@ table! {
         id -> Int4,
         email -> Text,
         pw -> Text,
+        login_status -> Bool,
     }
 }
 
