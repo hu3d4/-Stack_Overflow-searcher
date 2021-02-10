@@ -15,6 +15,7 @@ pub struct User {
     pub id: i32,
     pub email: String,
     pub pw: String,
+    pub login_status: bool,
 }
 
 #[derive(Insertable, Deserialize)]
@@ -39,5 +40,11 @@ pub struct DeleteHistory {
 #[derive(Template)]
 #[template(path = "index.html")]
 pub struct IndexTemplate {
+    pub entries: Vec<History>,
+}
+
+#[derive(Template)]
+#[template(path = "users/result.html")]
+pub struct ResultTemplate {
     pub entries: Vec<History>,
 }
