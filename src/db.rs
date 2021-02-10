@@ -21,15 +21,11 @@ pub fn add_history(input: &AddHistory) -> Result<History, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn show_user() -> Result<Vec<User>, AppError> {
-    use crate::diesel::prelude::*;
-    use crate::schema::users::dsl::users;
-
+pub fn add_user(user: &AddUser) -> Result<User, AppError> {
     let conn = establish_connection();
-    return users
-        // .filter(id.eq(true))
-        .limit(15)
-        .load::<User>(&conn)
+    return diesel::insert_into(users::table)
+        .values(user)
+        .get_result(&conn)
         .map_err(|e| (AppError::DbError(e)));
 }
 
@@ -41,6 +37,17 @@ pub fn show_history() -> Result<Vec<History>, AppError> {
         .filter(done.eq(true))
         .limit(15)
         .load::<History>(&conn)
+        .map_err(|e| (AppError::DbError(e)));
+}
+
+pub fn show_user() -> Result<Vec<User>, AppError> {
+    use crate::diesel::prelude::*;
+    use crate::schema::users::dsl::*;
+    let conn = establish_connection();
+    return users
+        .filter(login_status.eq(true))
+        .limit(15)
+        .load::<User>(&conn)
         .map_err(|e| (AppError::DbError(e)));
 }
 
@@ -58,13 +65,5 @@ pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
     let conn = establish_connection();
     return diesel::delete(dsl::histories.filter(dsl::id.eq(result)))
         .execute(&conn)
-        .map_err(|e| (AppError::DbError(e)));
-}
-
-pub fn add_user(user: &NewUser) -> std::result::Result<User, AppError> {
-    let conn = establish_connection();
-    return diesel::insert_into(users::table)
-        .values(user)
-        .get_result(&conn)
         .map_err(|e| (AppError::DbError(e)));
 }
