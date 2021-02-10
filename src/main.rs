@@ -5,6 +5,7 @@ mod models;
 mod schema;
 
 use crate::handlers::*;
+use actix_files as fs;
 use actix_web::{web, App, HttpServer};
 use std::net::TcpListener;
 
@@ -22,6 +23,7 @@ async fn main() -> std::io::Result<()> {
             .route("/delete", web::post().to(delete_history))
             .route("/delete_one", web::post().to(delete_one_history))
             .route("/add_user", web::post().to(add_user))
+            .service(fs::Files::new("/", "/static"))
     })
     .listen(listener)?
     .run()
