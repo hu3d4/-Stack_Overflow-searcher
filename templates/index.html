@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
     <title>Stack Overflow Searcher</title>
 </head>
 
@@ -51,6 +51,8 @@
         </ul>
     </section>
 
+    <a href="/templates/signup.html">signup page</a>
+
     <form action="/add_user" method="POST">
         <div>
             <label for="email">E-mail:</label>
@@ -63,85 +65,8 @@
         <input type="submit" value="Sign Up">
     </form>
 
-    <script>
-        function addHistory() {
-            document.forms['addHistory'].submit();
-        }
+    <script type="text/javascript" src="/static/index.js"></script>
 
-        function customSearch() {
-            let input_text = document.getElementById("input").value;
-            document.forms['customSearch'].elements['q'].value = input_text;
-            document.forms['customSearch'].submit();
-        }
-
-        function callAfter() {
-            let acc = [customSearch(), addHistory()]
-            while (acc.length > 0) {
-                acc.shift();
-            }
-        }
-    </script>
-
-
-    <style>
-        .main {
-            width: 440px;
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        .search {
-            width: 370px;
-            height: 29px;
-            margin-right: -10px;
-        }
-
-        .search__box {
-            width: 263px;
-        }
-
-        .search__button {
-            color: #FFF;
-            background-color: #461200;
-            width: 71px;
-            height: 29px;
-        }
-
-        .delete {
-            width: 71px;
-            padding-left: 10px;
-            padding-top: 3px;
-        }
-
-        .content {
-            display: flex;
-            width: 440px;
-            margin-right: auto;
-            margin-left: auto;
-            padding-top: 30px;
-        }
-
-        .border {
-            border-bottom: 1px solid;
-            color: rgba(0, 0, 0, .1);
-        }
-
-        .history__area {
-            list-style: none;
-            padding-left: 0px;
-            position: relative;
-        }
-
-        .history__group {
-            display: flex;
-            justify-content: space-between;
-            padding-bottom: 18px;
-        }
-
-        .history__item {
-            color: #950000;
-        }
-    </style>
 </body>
 
 </html>
