@@ -21,6 +21,18 @@ pub fn add_history(input: &AddHistory) -> Result<History, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
+pub fn show_user() -> Result<Vec<User>, AppError> {
+    use crate::diesel::prelude::*;
+    use crate::schema::users::dsl::users;
+
+    let conn = establish_connection();
+    return users
+        // .filter(id.eq(true))
+        .limit(15)
+        .load::<User>(&conn)
+        .map_err(|e| (AppError::DbError(e)));
+}
+
 pub fn show_history() -> Result<Vec<History>, AppError> {
     use crate::diesel::prelude::*;
     use crate::schema::histories::dsl::*;
