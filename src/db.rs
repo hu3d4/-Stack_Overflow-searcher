@@ -40,7 +40,8 @@ pub fn show_history() -> Result<Vec<History>, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn show_user() -> Result<Vec<User>, AppError> {
+// pub fn show_user() -> Result<Vec<User>, AppError> {
+pub fn show_user() -> Vec<User> {
     use crate::diesel::prelude::*;
     use crate::schema::users::dsl::*;
     let conn = establish_connection();
@@ -48,7 +49,8 @@ pub fn show_user() -> Result<Vec<User>, AppError> {
         .filter(login_status.eq(true))
         .limit(15)
         .load::<User>(&conn)
-        .map_err(|e| (AppError::DbError(e)));
+        .unwrap();
+    // .map_err(|e| (AppError::DbError(e)));
 }
 
 pub fn delete_all_history() -> Result<usize, AppError> {
