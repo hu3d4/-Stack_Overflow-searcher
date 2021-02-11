@@ -6,6 +6,7 @@ mod schema;
 
 use crate::handlers::*;
 use actix_files as fs;
+use actix_session::{CookieSession, Session};
 use actix_web::{web, App, HttpServer};
 use std::net::TcpListener;
 
