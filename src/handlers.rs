@@ -13,24 +13,6 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .body(response_body))
 }
 
-// pub async fn index_users() -> Result<impl Responder, AppError> {
-//     use crate::schema::histories::id;
-//     let entries = db::show_history()?;
-//     // ユーザーごとに表示する値を変更する。
-//     // pub id: i32,
-//     // pub input: String,
-//     // pub done: bool,
-//     for i in entries.iter() {
-//         let a = i.id;
-//     }
-//     let a = entries;
-//     let html = ResultTemplate { entries };
-//     let response_body = html.render()?;
-//     Ok(HttpResponse::Ok()
-//         .content_type("text/html")
-//         .body(response_body))
-// }
-
 pub async fn add_history(form: web::Form<AddHistory>) -> Result<impl Responder, AppError> {
     db::add_history(&form)?;
     Ok(HttpResponse::SeeOther()
