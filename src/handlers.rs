@@ -100,10 +100,12 @@ pub async fn delete_single_history(
         .finish())
 }
 
-pub async fn get_user_by_id() -> impl Responder {
-    format!("hello from get users by id")
-}
-
-pub async fn delete_user() -> impl Responder {
-    format!("hello from delete user")
+pub async fn delete_single_user(
+    form: web::Form<DeleteHistory>,
+) -> Result<impl Responder, AppError> {
+    let id = form.id;
+    db::delete_single_history(id)?;
+    Ok(HttpResponse::SeeOther()
+        .header(header::LOCATION, "/")
+        .finish())
 }
