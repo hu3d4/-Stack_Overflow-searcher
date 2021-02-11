@@ -23,6 +23,7 @@ async fn main() -> std::io::Result<()> {
             .route("/delete", web::post().to(delete_history))
             .route("/delete_one", web::post().to(delete_single_history))
             .route("/add_user", web::post().to(add_user))
+            .route("/register/{id}", web::delete().to(delete_single_user))
             .service(fs::Files::new("/", "/static"))
     })
     .listen(listener)?
