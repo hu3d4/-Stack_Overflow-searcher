@@ -104,7 +104,7 @@ pub async fn delete_single_user(
     form: web::Form<DeleteHistory>,
 ) -> Result<impl Responder, AppError> {
     let id = form.id;
-    db::delete_single_history(id)?;
+    db::delete_single_user(id)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())
