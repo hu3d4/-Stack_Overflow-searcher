@@ -44,7 +44,7 @@ pub struct IndexTemplate {
 }
 
 #[derive(Template)]
-#[template(path = "users/result.html")]
+#[template(path = "register/result.html")]
 pub struct ResultTemplate {
     pub entries: Vec<History>,
 }
