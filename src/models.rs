@@ -13,16 +13,19 @@ pub struct History {
 #[derive(Debug, Queryable)]
 pub struct User {
     pub id: i32,
-    pub email: String,
-    pub pw: String,
+    pub users: String,
     pub login_status: bool,
 }
 
 #[derive(Insertable, Deserialize)]
 #[table_name = "users"]
 pub struct AddUser {
-    pub email: String,
-    pub pw: String,
+    pub users: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct InputUser {
+    pub user: String,
 }
 
 #[derive(Insertable, Deserialize)]
