@@ -9,7 +9,7 @@ table! {
 table! {
     users (id) {
         id -> Int4,
-        users_name -> Text,
+        username -> Text,
         login_status -> Bool,
     }
 }

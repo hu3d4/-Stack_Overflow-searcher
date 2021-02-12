@@ -21,10 +21,10 @@ pub fn add_history(input: &AddHistory) -> Result<History, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn add_user(users: &AddUser) -> Result<User, AppError> {
+pub fn add_user(username: &AddUser) -> Result<User, AppError> {
     let conn = establish_connection();
     return diesel::insert_into(users::table)
-        .values(users)
+        .values(username)
         .get_result(&conn)
         .map_err(|e| (AppError::DbError(e)));
 }
