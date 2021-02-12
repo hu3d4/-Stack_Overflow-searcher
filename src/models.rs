@@ -1,7 +1,7 @@
 use crate::schema::{histories, users};
 
 use askama::Template;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Queryable)]
 pub struct History {
