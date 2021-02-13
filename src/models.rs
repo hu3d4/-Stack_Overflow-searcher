@@ -20,13 +20,13 @@ pub struct User {
 
 #[derive(Insertable, Deserialize)]
 #[table_name = "histories"]
-pub struct AddHistory {
+pub struct GetHistory {
     pub input: String,
 }
 
 #[derive(Insertable, Deserialize)]
 #[table_name = "users"]
-pub struct AddUser {
+pub struct GetUser {
     pub username: String,
 }
 

@@ -14,7 +14,7 @@ pub fn establish_connection() -> PgConnection {
 }
 
 pub fn get_history(input: String) -> Result<History, AppError> {
-    let history_entory = AddHistory { input };
+    let history_entory = GetHistory { input };
     let conn = establish_connection();
     return diesel::insert_into(histories::table)
         .values(&history_entory)
@@ -22,7 +22,7 @@ pub fn get_history(input: String) -> Result<History, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn get_user(username: &AddUser) -> Result<User, AppError> {
+pub fn get_user(username: &GetUser) -> Result<User, AppError> {
     let conn = establish_connection();
     return diesel::insert_into(users::table)
         .values(username)

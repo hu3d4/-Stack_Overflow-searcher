@@ -13,7 +13,7 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .body(response_body))
 }
 
-pub async fn get_history(form: web::Form<AddHistory>) -> Result<impl Responder, AppError> {
+pub async fn get_history(form: web::Form<GetHistory>) -> Result<impl Responder, AppError> {
     let input = form.input.clone();
     db::get_history(input)?;
     Ok(HttpResponse::SeeOther()
@@ -21,7 +21,7 @@ pub async fn get_history(form: web::Form<AddHistory>) -> Result<impl Responder, 
         .finish())
 }
 
-pub async fn get_user(form: web::Form<AddUser>) -> Result<impl Responder, AppError> {
+pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppError> {
     db::get_user(&form)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
