@@ -1,3 +1,4 @@
+mod config;
 mod db;
 mod errors;
 mod handlers;
@@ -16,7 +17,9 @@ extern crate dotenv;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    let listener = TcpListener::bind("0.0.0.0:8080").expect("unable to bind TCP listener");
+    let config = Config::from_env().expect("Server configuration");
+    let listener = TcpListener::bind(format!("{}:{}", config.host, config.port))
+        .expect("unable to bind TCP listener");
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(index))
