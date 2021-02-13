@@ -5,6 +5,7 @@ mod handlers;
 mod models;
 mod schema;
 
+use crate::config::Config;
 use crate::handlers::*;
 use actix_files as fs;
 use actix_session::{CookieSession, Session};
