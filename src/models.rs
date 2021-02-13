@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Queryable)]
 pub struct History {
     pub id: i32,
+    pub userid: i32,
     pub input: String,
     pub done: bool,
 }
