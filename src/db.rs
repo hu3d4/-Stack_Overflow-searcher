@@ -23,6 +23,14 @@ pub fn add_history(input: String) -> Result<History, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
+pub fn add_user(username: &AddUser) -> Result<User, AppError> {
+    let conn = establish_connection();
+    return diesel::insert_into(users::table)
+        .values(username)
+        .get_result(&conn)
+        .map_err(|e| (AppError::DbError(e)));
+}
+
 pub fn show_history() -> Result<Vec<History>, AppError> {
     use crate::diesel::prelude::*;
     use crate::schema::histories::dsl::*;
