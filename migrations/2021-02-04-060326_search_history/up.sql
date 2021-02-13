@@ -1,5 +1,5 @@
 -- Your SQL goes here
-CREATE TABLE IF NOT EXISTS history (
+CREATE TABLE IF NOT EXISTS histories (
     id SERIAL,
     userid INTEGER NOT NULL,
     input TEXT NOT NULL,
