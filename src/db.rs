@@ -17,7 +17,7 @@ pub fn establish_connection() -> PgConnection {
 pub fn add_history(input: String) -> Result<History, AppError> {
     let history_entory = AddHistory { input };
     let conn = establish_connection();
-    return diesel::insert_into(history::table)
+    return diesel::insert_into(histories::table)
         .values(&history_entory)
         .get_result(&conn)
         .map_err(|e| (AppError::DbError(e)));
@@ -25,9 +25,9 @@ pub fn add_history(input: String) -> Result<History, AppError> {
 
 pub fn show_history() -> Result<Vec<History>, AppError> {
     use crate::diesel::prelude::*;
-    use crate::schema::history::dsl::*;
+    use crate::schema::histories::dsl::*;
     let conn = establish_connection();
-    return history
+    return histories
         .filter(done.eq(true))
         .limit(15)
         .load::<History>(&conn)
@@ -36,17 +36,17 @@ pub fn show_history() -> Result<Vec<History>, AppError> {
 
 pub fn delete_all_history() -> Result<usize, AppError> {
     let conn = establish_connection();
-    return diesel::delete(history::table.filter(history::id.gt(0)))
+    return diesel::delete(histories::table.filter(histories::id.gt(0)))
         .execute(&conn)
         .map_err(|e| (AppError::DbError(e)));
 }
 
 pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
-    use crate::schema::history::dsl;
+    use crate::schema::histories::dsl;
     let delete_entory = DeleteHistory { id };
     let result = &delete_entory.id;
     let conn = establish_connection();
-    return diesel::delete(dsl::history.filter(dsl::id.eq(result)))
+    return diesel::delete(dsl::histories.filter(dsl::id.eq(result)))
         .execute(&conn)
         .map_err(|e| (AppError::DbError(e)));
 }
