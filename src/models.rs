@@ -25,7 +25,7 @@ pub struct AddUser {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct InputUser {
-    pub user: String,
+    pub username: String,
 }
 
 #[derive(Insertable, Deserialize)]
