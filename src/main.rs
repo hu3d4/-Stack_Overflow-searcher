@@ -21,7 +21,7 @@ async fn main() -> std::io::Result<()> {
             .route("/", web::get().to(index))
             .route("/get", web::post().to(add_history))
             .route("/delete", web::post().to(delete_history))
-            .route("/delete_one", web::post().to(delete_one_history))
+            .route("/delete_one", web::post().to(delete_single_history))
             .service(fs::Files::new("/", "/static"))
     })
     .listen(listener)?

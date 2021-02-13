@@ -29,7 +29,7 @@ pub async fn delete_history() -> Result<impl Responder, AppError> {
         .finish())
 }
 
-pub async fn delete_one_history(
+pub async fn delete_single_history(
     form: web::Form<DeleteHistory>,
 ) -> Result<impl Responder, AppError> {
     let id = form.id;
