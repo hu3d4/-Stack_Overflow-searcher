@@ -75,7 +75,7 @@ pub fn delete_single_user(id: i32) -> Result<usize, AppError> {
     let delete_entory = DeleteHistory { id };
     let result = &delete_entory.id;
     let conn = establish_connection();
-    return diesel::delete(dsl::users.filter(dsl::id.eq(result)))
+    return diesel::delete(dsl::users.filter(dsl::userid.eq(result)))
         .execute(&conn)
         .map_err(|e| (AppError::DbError(e)));
 }
