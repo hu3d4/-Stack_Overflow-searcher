@@ -12,7 +12,7 @@ pub struct History {
 
 #[derive(Debug, Queryable)]
 pub struct User {
-    pub id: i32,
+    pub userid: i32,
     pub username: String,
     pub login_status: bool,
 }
