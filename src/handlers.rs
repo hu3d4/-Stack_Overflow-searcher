@@ -1,7 +1,6 @@
 use crate::db;
 use crate::errors::AppError;
-use crate::models::DeleteHistory;
-use crate::models::{AddHistory, IndexTemplate};
+use crate::models::*;
 use actix_web::{http::header, web, HttpResponse, Responder};
 use askama::Template;
 
@@ -14,16 +13,16 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .body(response_body))
 }
 
-pub async fn add_history(form: web::Form<AddHistory>) -> Result<impl Responder, AppError> {
+pub async fn get_history(form: web::Form<AddHistory>) -> Result<impl Responder, AppError> {
     let input = form.input.clone();
-    db::add_history(input)?;
+    db::get_history(input)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())
 }
 
-pub async fn add_user(form: web::Form<AddUser>) -> Result<impl Responder, AppError> {
-    db::add_user(&form)?;
+pub async fn get_user(form: web::Form<AddUser>) -> Result<impl Responder, AppError> {
+    db::get_user(&form)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())

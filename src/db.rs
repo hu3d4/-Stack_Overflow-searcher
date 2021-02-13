@@ -1,7 +1,6 @@
 use crate::errors::AppError;
-use crate::models::DeleteHistory;
-use crate::models::{AddHistory, History};
-use crate::schema::history;
+use crate::models::*;
+use crate::schema::*;
 
 use diesel::pg::PgConnection;
 use diesel::prelude::{Connection, ExpressionMethods, QueryDsl, RunQueryDsl};
@@ -14,7 +13,7 @@ pub fn establish_connection() -> PgConnection {
     PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn add_history(input: String) -> Result<History, AppError> {
+pub fn get_history(input: String) -> Result<History, AppError> {
     let history_entory = AddHistory { input };
     let conn = establish_connection();
     return diesel::insert_into(histories::table)
@@ -23,7 +22,7 @@ pub fn add_history(input: String) -> Result<History, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn add_user(username: &AddUser) -> Result<User, AppError> {
+pub fn get_user(username: &AddUser) -> Result<User, AppError> {
     let conn = establish_connection();
     return diesel::insert_into(users::table)
         .values(username)
@@ -62,7 +61,7 @@ pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
 #[cfg(test)]
 mod tests {
     use super::{Connection, PgConnection, RunQueryDsl};
-    use crate::db::add_history;
+    use crate::db::get_history;
     use pretty_assertions::assert_eq;
 
     #[test]
@@ -75,7 +74,7 @@ mod tests {
         diesel::sql_query("INSERT INTO history (input) VALUES ('text')")
             .execute(&conn)
             .unwrap();
-        let u = add_history("text".to_string()).unwrap();
+        let u = get_history("text".to_string()).unwrap();
 
         assert_eq!(u.input, "text".to_string());
     }

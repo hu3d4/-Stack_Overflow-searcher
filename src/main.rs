@@ -19,7 +19,8 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(index))
-            .route("/get", web::post().to(add_history))
+            .route("/get", web::post().to(get_history))
+            .route("/get_user", web::post().to(get_user))
             .route("/delete", web::post().to(delete_history))
             .route("/delete_one", web::post().to(delete_single_history))
             .service(fs::Files::new("/", "/static"))
