@@ -1,4 +1,4 @@
-use crate::schema::history;
+use crate::schema::*;
 
 use askama::Template;
 use serde::Deserialize;
@@ -11,13 +11,13 @@ pub struct History {
 }
 
 #[derive(Insertable, Deserialize)]
-#[table_name = "history"]
+#[table_name = "histories"]
 pub struct AddHistory {
     pub input: String,
 }
 
 #[derive(Insertable, Deserialize)]
-#[table_name = "history"]
+#[table_name = "histories"]
 pub struct DeleteHistory {
     pub id: i32,
 }
