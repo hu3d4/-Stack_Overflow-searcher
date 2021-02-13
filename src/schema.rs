@@ -1,14 +1,15 @@
 table! {
     histories (id) {
         id -> Int4,
+        userid -> Nullable<Int4>,
         input -> Text,
         done -> Bool,
     }
 }
 
 table! {
-    users (id) {
-        id -> Int4,
+    users (userid) {
+        userid -> Int4,
         username -> Text,
         login_status -> Bool,
     }
