@@ -1,7 +1,7 @@
 use crate::db;
 use crate::errors::AppError;
 use crate::models::*;
-use actix_web::{http::header, web, HttpResponse, Responder};
+use actix_web::{http::header, web, HttpRequest, HttpResponse, Responder};
 use askama::Template;
 
 pub async fn index() -> Result<impl Responder, AppError> {
