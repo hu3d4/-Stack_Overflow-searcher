@@ -13,8 +13,8 @@ pub fn establish_connection() -> PgConnection {
     PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn get_history(input: String) -> Result<History, AppError> {
-    let history_entory = GetHistory { input };
+pub fn get_history(input: String, username: String) -> Result<History, AppError> {
+    let history_entory = GetHistory { input, username };
     let conn = establish_connection();
     return diesel::insert_into(histories::table)
         .values(&history_entory)
