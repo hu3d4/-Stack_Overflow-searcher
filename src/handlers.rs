@@ -49,6 +49,15 @@ pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppErr
         .finish())
 }
 
+// pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppError> {
+//     let username = form.username.clone();
+//     let html = IndexTemplateUser { username };
+//     let response_body = html.render()?;
+//     Ok(HttpResponse::Ok()
+//         .content_type("text/html")
+//         .body(response_body))
+// }
+
 pub async fn delete_history() -> Result<impl Responder, AppError> {
     db::delete_all_history()?;
     Ok(HttpResponse::SeeOther()
