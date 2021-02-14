@@ -13,15 +13,15 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .body(response_body))
 }
 
-pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
-    let uservalue = req.match_info().get("name").unwrap_or("World");
-    let username = uservalue.to_string();
-    let html = IndexTemplateUser { username };
-    let response_body = html.render()?;
-    Ok(HttpResponse::Ok()
-        .content_type("text/html")
-        .body(response_body))
-}
+// pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
+//     let uservalue = req.match_info().get("name").unwrap_or("World");
+//     let username = uservalue.to_string();
+//     let html = IndexTemplateUser { username };
+//     let response_body = html.render()?;
+//     Ok(HttpResponse::Ok()
+//         .content_type("text/html")
+//         .body(response_body))
+// }
 
 // pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
 //     let uservalue = req.match_info().get("name").unwrap_or("World");
