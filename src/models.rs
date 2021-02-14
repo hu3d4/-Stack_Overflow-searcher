@@ -41,3 +41,9 @@ pub struct DeleteHistory {
 pub struct IndexTemplate {
     pub entries: Vec<History>,
 }
+
+#[derive(Template)]
+#[template(path = "index.html")]
+pub struct IndexTemplateUser {
+    pub user_name: String,
+}
