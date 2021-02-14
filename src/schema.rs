@@ -1,7 +1,6 @@
 table! {
     histories (id) {
         id -> Int4,
-        username -> Text,
         input -> Text,
         done -> Bool,
     }
