@@ -42,9 +42,10 @@ pub async fn get_history(form: web::Form<GetHistory>) -> Result<impl Responder, 
 }
 
 pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppError> {
-    db::get_user(&form)?;
+    let user_name = form.username.clone();
+    // db::get_history(user_name)?;
     Ok(HttpResponse::SeeOther()
-        .header(header::LOCATION, "/")
+        .header(header::LOCATION, format!("/get_user/{}", user_name))
         .finish())
 }
 
