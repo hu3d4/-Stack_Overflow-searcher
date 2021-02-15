@@ -45,7 +45,7 @@ pub struct IndexTemplate {
 
 #[derive(Template)]
 #[template(path = "login.html")]
-pub struct IndexTemplateUser {
+pub struct UserTemplate {
     pub user_name: String,
 }
 // userの let html = IndexTemplate { entries };

@@ -22,7 +22,7 @@ pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
         .expect("Failed to load user information.");
     let user_name = uservalue.to_string();
     println!("index_user{}", user_name);
-    let html = IndexTemplateUser { user_name };
+    let html = UserTemplate { user_name };
     let response_body = html.render()?;
     Ok(HttpResponse::Ok()
         .content_type("text/html")
