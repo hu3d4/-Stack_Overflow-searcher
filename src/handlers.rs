@@ -6,7 +6,7 @@ use askama::Template;
 
 pub async fn index() -> Result<impl Responder, AppError> {
     let entries = db::show_history()?;
-    let html = IndexTemplate { entries };
+    let html = HistoryTemplate { entries };
     let response_body = html.render()?;
     Ok(HttpResponse::Ok()
         .content_type("text/html")
