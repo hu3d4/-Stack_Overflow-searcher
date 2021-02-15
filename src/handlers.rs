@@ -13,6 +13,15 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .body(response_body))
 }
 
+// pub async fn username_html() -> Result<impl Responder, AppError> {
+//     let entries = db::show_history()?;
+//     let html = IndexTemplate { entries };
+//     let response_body = html.render()?;
+//     Ok(HttpResponse::Ok()
+//         .content_type("text/html")
+//         .body(response_body))
+// }
+
 // // htmlレンダーに渡してget_historyにユーザー情報を渡すためのファンクション
 pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
     // use crate::schema::users::username;
