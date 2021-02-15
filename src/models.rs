@@ -48,3 +48,6 @@ pub struct IndexTemplate {
 pub struct IndexTemplateUser {
     pub user_name: String,
 }
+// userの let html = IndexTemplate { entries };
+// let response_body = html.render()?;
+// を書かないといけない
