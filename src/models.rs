@@ -1,5 +1,4 @@
 use crate::schema::*;
-
 use askama::Template;
 use serde::Deserialize;
 
@@ -48,6 +47,3 @@ pub struct HistoryTemplate {
 pub struct UserTemplate {
     pub user_name: String,
 }
-// userの let html = IndexTemplate { entries };
-// let response_body = html.render()?;
-// を書かないといけない
