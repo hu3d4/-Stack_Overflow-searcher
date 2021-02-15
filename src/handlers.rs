@@ -4,14 +4,14 @@ use crate::models::*;
 use actix_web::{http::header, web, HttpRequest, HttpResponse, Responder};
 use askama::Template;
 
-// pub async fn index() -> Result<impl Responder, AppError> {
-//     let entries = db::show_history()?;
-//     let html = HistoryTemplate { entries };
-//     let response_body = html.render()?;
-//     Ok(HttpResponse::Ok()
-//         .content_type("text/html")
-//         .body(response_body))
-// }
+pub async fn index() -> Result<impl Responder, AppError> {
+    let entries = db::show_history()?;
+    let html = HistoryTemplate { entries };
+    let response_body = html.render()?;
+    Ok(HttpResponse::Ok()
+        .content_type("text/html")
+        .body(response_body))
+}
 
 // pub async fn username_html() -> Result<impl Responder, AppError> {
 //     let entries = db::show_history()?;

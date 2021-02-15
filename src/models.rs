@@ -37,11 +37,11 @@ pub struct DeleteHistory {
     pub id: i32,
 }
 
-// #[derive(Template)]
-// #[template(path = "index.html")]
-// pub struct HistoryTemplate {
-//     pub entries: Vec<History>,
-// }
+#[derive(Template)]
+#[template(path = "index.html")]
+pub struct HistoryTemplate {
+    pub entries: Vec<History>,
+}
 
 #[derive(Template)]
 #[template(path = "index.html")]
