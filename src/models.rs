@@ -44,7 +44,7 @@ pub struct HistoryTemplate {
 }
 
 #[derive(Template)]
-#[template(path = "login.html")]
+#[template(path = "index.html")]
 pub struct UserTemplate {
     pub user_name: String,
 }
