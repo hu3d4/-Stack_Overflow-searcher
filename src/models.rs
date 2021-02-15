@@ -44,7 +44,7 @@ pub struct IndexTemplate {
 }
 
 #[derive(Template)]
-#[template(path = "index.html")]
+#[template(path = "login.html")]
 pub struct IndexTemplateUser {
     pub user_name: String,
 }
