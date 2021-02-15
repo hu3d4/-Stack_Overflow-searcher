@@ -22,13 +22,13 @@ pub fn get_history(input: String, username: String) -> Result<History, AppError>
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn get_user(username: &GetUser) -> Result<User, AppError> {
-    let conn = establish_connection();
-    return diesel::insert_into(users::table)
-        .values(username)
-        .get_result(&conn)
-        .map_err(|e| (AppError::DbError(e)));
-}
+// pub fn get_user(username: &GetUser) -> Result<User, AppError> {
+//     let conn = establish_connection();
+//     return diesel::insert_into(users::table)
+//         .values(username)
+//         .get_result(&conn)
+//         .map_err(|e| (AppError::DbError(e)));
+// }
 
 pub fn show_history() -> Result<Vec<History>, AppError> {
     use crate::diesel::prelude::*;
