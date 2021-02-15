@@ -42,6 +42,7 @@ pub async fn get_history(form: web::Form<GetHistory>) -> Result<impl Responder, 
     let input = form.input.clone();
     let username = form.username.clone();
     println!("{}", input);
+    println!("{}", username);
     db::get_history(input, username)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
