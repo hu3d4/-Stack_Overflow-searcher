@@ -13,18 +13,20 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .body(response_body))
 }
 
-// pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
-//     let uservalue = req
-//         .match_info()
-//         .get("username")
-//         .expect("Failed to load user information.");
-//     let user_name = uservalue.to_string();
-//     let html = IndexTemplateUser { user_name };
-//     let response_body = html.render()?;
-//     Ok(HttpResponse::Ok()
-//         .content_type("text/html")
-//         .body(response_body))
-// }
+// // htmlレンダーに渡してget_historyにユーザー情報を渡すためのファンクション
+pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
+    // use crate::schema::users::username;
+    let uservalue = req
+        .match_info()
+        .get("username")
+        .expect("Failed to load user information.");
+    let user_name = uservalue.to_string();
+    let html = IndexTemplateUser { user_name };
+    let response_body = html.render()?;
+    Ok(HttpResponse::Ok()
+        .content_type("text/html")
+        .body(response_body))
+}
 
 pub async fn get_history(form: web::Form<GetHistory>) -> Result<impl Responder, AppError> {
     let input = form.input.clone();
