@@ -42,12 +42,6 @@ pub struct HistoryTemplate {
     pub entries: Vec<History>,
 }
 
-// #[derive(Template)]
-// #[template(path = "index.html")]
-pub struct UserTemplate {
-    pub user_name: String,
-}
-
 #[derive(Template)]
 #[template(path = "authenticated.html")]
 pub struct UserHistoryTemplate {
