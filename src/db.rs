@@ -30,12 +30,11 @@ pub fn get_history(input: String, username: String) -> Result<History, AppError>
 //         .map_err(|e| (AppError::DbError(e)));
 // }
 
-pub fn show_history() -> Result<Vec<History>, AppError> {
-    use crate::diesel::prelude::*;
+pub fn show_history(user_name: &String) -> Result<Vec<History>, AppError> {
     use crate::schema::histories::dsl::*;
     let conn = establish_connection();
     return histories
-        .filter(done.eq(true))
+        .filter(username.eq(format!("{}", user_name)))
         .limit(15)
         .load::<History>(&conn)
         .map_err(|e| (AppError::DbError(e)));
