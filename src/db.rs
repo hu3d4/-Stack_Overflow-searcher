@@ -50,7 +50,7 @@ pub fn delete_all_history(username: &String) -> Result<usize, AppError> {
     .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
+pub fn delete_single_history(id: i32) -> Result<usize, AppError> {
     use crate::schema::histories::dsl;
     let delete_entory = DeleteHistory { id };
     let result = &delete_entory.id;
