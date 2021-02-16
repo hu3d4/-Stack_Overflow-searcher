@@ -16,7 +16,6 @@
     </datalist>
 
     <section class="content">
-        <p>{{ user }}</p>
         <form id="addHistory" action="/get_history" class="search" method="post" target="get">
             <input type="text" name="input" id="input" class="search__box" list="example" size="31" value="" />
             <input type="text" name="username" size="31" value="{{ user }}" style="display:none;" />
