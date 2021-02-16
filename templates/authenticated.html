@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <title>Stack Overflow Searcher</title>
+</head>
+
+<body class="main">
+    <datalist id="example">
+        {% for entry in history.entries %}
+        <option value="{{ entry.input }}"></option>
+        {% endfor %}
+    </datalist>
+
+    <section class="content">
+        <p>{{ user }}</p>
+        <form id="addHistory" action="/get_history" class="search" method="post" target="get">
+            <input type="text" name="input" id="input" class="search__box" list="example" size="31" value="" />
+            <input type="text" name="username" size="31" value="{{ user }}" style="display:none;" />
+            <button class="search__button" onclick="callAfter()">Search</button>
+        </form>
+
+        <form action="http://google.com/cse" id="customSearch" style="display:none;">
+            <input type="hidden" name="cx" value="d061fd4b57d2ccc0c" />
+            <input type="hidden" name="ie" value="UTF-8" />
+            <input type="hidden" name="q" value="" />
+        </form>
+
+        <iframe name="get" style="display:none;"></iframe>
+
+        <form id="DeleteHistory" action="/delete/{{ user }}" class="delete" method="post">
+            <input type="text" size="31" value="" style="display:none;" />
+            <button class="search__button">AllDelete</button>
+        </form>
+    </section>
+
+    <p class="border"></p>
+
+    <section class="history">
+        <ul class="history__area">
+            {% for entry in history.entries %}
+            <div class="history__group">
+                <li class="history__item">{{ entry.input }}</li>
+                <form class="history__form" id="DeleteHistory" action="/delete_one" method="post">
+                    <input type="text" size="31" name="id" value="{{ entry.id }}" style="display:none;" />
+                    <button class="search__button">Delete</button>
+                </form>
+            </div>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <a href="/templates/login.html">login page</a>
+    <a href="/templates/register/result.html">result page</a>
+
+    <script type="text/javascript" src="/static/index.js"></script>
+
+</body>
+
+</html>
