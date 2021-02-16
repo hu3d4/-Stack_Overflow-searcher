@@ -45,8 +45,13 @@ pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppErr
         .finish())
 }
 
-pub async fn delete_history() -> Result<impl Responder, AppError> {
-    db::delete_all_history()?;
+pub async fn delete_history(req: HttpRequest) -> Result<impl Responder, AppError> {
+    let uservalue = req
+        .match_info()
+        .get("username")
+        .expect("Failed to load user information.");
+    let user_name = uservalue.to_string();
+    db::delete_all_history(user_name)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())
