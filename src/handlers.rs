@@ -5,7 +5,8 @@ use actix_web::{http::header, web, HttpRequest, HttpResponse, Responder};
 use askama::Template;
 
 pub async fn index() -> Result<impl Responder, AppError> {
-    let entries = db::show_history()?;
+    let text = "text".to_string();
+    let entries = db::show_history(&text)?;
     let html = HistoryTemplate { entries };
     let response_body = html.render()?;
     Ok(HttpResponse::Ok()
