@@ -101,6 +101,6 @@ pub async fn delete_single_history(
     let id = form.id;
     db::delete_single_history(id)?;
     Ok(HttpResponse::SeeOther()
-        .header(header::LOCATION, "/")
+        .header(header::LOCATION, format!("/get_user/{}", user_name))
         .finish())
 }
