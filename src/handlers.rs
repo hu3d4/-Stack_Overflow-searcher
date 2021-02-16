@@ -96,8 +96,14 @@ pub async fn delete_history(req: HttpRequest) -> Result<impl Responder, AppError
 }
 
 pub async fn delete_single_history(
+    req: HttpRequest,
     form: web::Form<DeleteHistory>,
 ) -> Result<impl Responder, AppError> {
+    let uservalue = req
+        .match_info()
+        .get("username")
+        .expect("Failed to load user information.");
+    let user_name = uservalue.to_string();
     let id = form.id;
     db::delete_single_history(id)?;
     Ok(HttpResponse::SeeOther()
