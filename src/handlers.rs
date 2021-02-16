@@ -14,13 +14,14 @@ pub async fn index() -> Result<impl Responder, AppError> {
 }
 
 pub async fn authenticated(req: HttpRequest) -> Result<impl Responder, AppError> {
-    let entries = db::show_history()?;
-    let history = HistoryTemplate { entries };
     let uservalue = req
         .match_info()
         .get("username")
         .expect("Failed to load user information.");
     let user = uservalue.to_string();
+
+    let entries = db::show_history(&user)?;
+    let history = HistoryTemplate { entries };
 
     let html = UserHistoryTemplate { history, user };
     let response_body = html.render()?;
