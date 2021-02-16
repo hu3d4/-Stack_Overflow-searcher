@@ -4,6 +4,7 @@ use crate::models::*;
 use actix_web::{http::header, web, HttpRequest, HttpResponse, Responder};
 use askama::Template;
 
+// historyに格納されているデータを表示する関数
 pub async fn index() -> Result<impl Responder, AppError> {
     let entries = db::show_history()?;
     let html = HistoryTemplate { entries };
