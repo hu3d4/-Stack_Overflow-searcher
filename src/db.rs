@@ -30,12 +30,11 @@ pub fn get_history(input: String, username: String) -> Result<History, AppError>
 //         .map_err(|e| (AppError::DbError(e)));
 // }
 
-pub fn show_history() -> Result<Vec<History>, AppError> {
-    use crate::diesel::prelude::*;
+pub fn show_history(user_name: &String) -> Result<Vec<History>, AppError> {
     use crate::schema::histories::dsl::*;
     let conn = establish_connection();
     return histories
-        .filter(done.eq(true))
+        .filter(username.eq(format!("{}", user_name)))
         .limit(15)
         .load::<History>(&conn)
         .map_err(|e| (AppError::DbError(e)));
@@ -50,7 +49,7 @@ pub fn delete_all_history(username: &String) -> Result<usize, AppError> {
     .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn delete_one_history(id: i32) -> Result<usize, AppError> {
+pub fn delete_single_history(id: i32) -> Result<usize, AppError> {
     use crate::schema::histories::dsl;
     let delete_entory = DeleteHistory { id };
     let result = &delete_entory.id;
