@@ -4,10 +4,26 @@ use crate::models::*;
 use actix_web::{http::header, web, HttpRequest, HttpResponse, Responder};
 use askama::Template;
 
-// historyに格納されているデータを表示する関数
-pub async fn index() -> Result<impl Responder, AppError> {
+// // historyに格納されているデータを表示する関数
+// pub async fn index() -> Result<impl Responder, AppError> {
+//     let entries = db::show_history()?;
+//     let html = HistoryTemplate { entries };
+//     let response_body = html.render()?;
+//     Ok(HttpResponse::Ok()
+//         .content_type("text/html")
+//         .body(response_body))
+// }
+
+pub async fn index(req: HttpRequest) -> Result<impl Responder, AppError> {
     let entries = db::show_history()?;
-    let html = HistoryTemplate { entries };
+    let history = HistoryTemplate { entries };
+    let uservalue = req
+        .match_info()
+        .get("username")
+        .expect("Failed to load user information.");
+    let user = uservalue.to_string();
+
+    let html = UserHistoryTemplate { history, user };
     let response_body = html.render()?;
     Ok(HttpResponse::Ok()
         .content_type("text/html")
@@ -36,19 +52,19 @@ pub async fn index() -> Result<impl Responder, AppError> {
 //     println!("{}", name);
 // }
 
-pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
-    let uservalue = req
-        .match_info()
-        .get("username")
-        .expect("Failed to load user information.");
-    let user_name = uservalue.to_string();
-    println!("index_user{}", user_name);
-    let html = UserTemplate { user_name };
-    let response_body = html.render()?;
-    Ok(HttpResponse::Ok()
-        .content_type("text/html")
-        .body(response_body))
-}
+// pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
+//     let uservalue = req
+//         .match_info()
+//         .get("username")
+//         .expect("Failed to load user information.");
+//     let user_name = uservalue.to_string();
+//     println!("index_user{}", user_name);
+//     let html = UserTemplate { user_name };
+//     let response_body = html.render()?;
+//     Ok(HttpResponse::Ok()
+//         .content_type("text/html")
+//         .body(response_body))
+// }
 
 pub async fn get_history(form: web::Form<GetHistory>) -> Result<impl Responder, AppError> {
     let input = form.input.clone();
