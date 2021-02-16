@@ -13,6 +13,28 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .body(response_body))
 }
 
+// pub async fn index(req: HttpRequest) -> Result<impl Responder, AppError> {
+//     let uservalue = req
+//         .match_info()
+//         .get("username")
+//         .expect("Failed to load user information.");
+//     let user_name = uservalue.to_string();
+//     let entries = db::show_history()?;
+//     let html = HistoryTemplate { entries };
+//     hikaku(user_name, &html);
+//     let response_body = html.render()?;
+//     Ok(HttpResponse::Ok()
+//         .content_type("text/html")
+//         .body(response_body))
+// }
+
+// fn hikaku(name: String, html: &HistoryTemplate) {
+//     for i in &html.entries {
+//         println!("{:?}", i);
+//     }
+//     println!("{}", name);
+// }
+
 pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
     let uservalue = req
         .match_info()
