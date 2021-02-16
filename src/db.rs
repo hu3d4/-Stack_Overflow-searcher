@@ -41,11 +41,13 @@ pub fn show_history() -> Result<Vec<History>, AppError> {
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn delete_all_history() -> Result<usize, AppError> {
+pub fn delete_all_history(username: &String) -> Result<usize, AppError> {
     let conn = establish_connection();
-    return diesel::delete(histories::table.filter(histories::id.gt(0)))
-        .execute(&conn)
-        .map_err(|e| (AppError::DbError(e)));
+    return diesel::delete(
+        histories::table.filter(histories::username.eq(format!("{}", username))),
+    )
+    .execute(&conn)
+    .map_err(|e| (AppError::DbError(e)));
 }
 
 pub fn delete_one_history(id: i32) -> Result<usize, AppError> {

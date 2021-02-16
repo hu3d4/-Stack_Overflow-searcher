@@ -4,6 +4,7 @@ use crate::models::*;
 use actix_web::{http::header, web, HttpRequest, HttpResponse, Responder};
 use askama::Template;
 
+// historyに格納されているデータを表示する関数
 pub async fn index() -> Result<impl Responder, AppError> {
     let entries = db::show_history()?;
     let html = HistoryTemplate { entries };
@@ -12,6 +13,28 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .content_type("text/html")
         .body(response_body))
 }
+
+// pub async fn index(req: HttpRequest) -> Result<impl Responder, AppError> {
+//     let uservalue = req
+//         .match_info()
+//         .get("username")
+//         .expect("Failed to load user information.");
+//     let user_name = uservalue.to_string();
+//     let entries = db::show_history()?;
+//     let html = HistoryTemplate { entries };
+//     hikaku(user_name, &html);
+//     let response_body = html.render()?;
+//     Ok(HttpResponse::Ok()
+//         .content_type("text/html")
+//         .body(response_body))
+// }
+
+// fn hikaku(name: String, html: &HistoryTemplate) {
+//     for i in &html.entries {
+//         println!("{:?}", i);
+//     }
+//     println!("{}", name);
+// }
 
 pub async fn index_user(req: HttpRequest) -> Result<impl Responder, AppError> {
     let uservalue = req
@@ -45,10 +68,15 @@ pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppErr
         .finish())
 }
 
-pub async fn delete_history() -> Result<impl Responder, AppError> {
-    db::delete_all_history()?;
+pub async fn delete_history(req: HttpRequest) -> Result<impl Responder, AppError> {
+    let uservalue = req
+        .match_info()
+        .get("username")
+        .expect("Failed to load user information.");
+    let user_name = uservalue.to_string();
+    db::delete_all_history(&user_name)?;
     Ok(HttpResponse::SeeOther()
-        .header(header::LOCATION, "/")
+        .header(header::LOCATION, format!("/get_user/{}", user_name))
         .finish())
 }
 
