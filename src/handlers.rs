@@ -14,7 +14,7 @@ use askama::Template;
 //         .body(response_body))
 // }
 
-pub async fn index(req: HttpRequest) -> Result<impl Responder, AppError> {
+pub async fn authenticated(req: HttpRequest) -> Result<impl Responder, AppError> {
     let entries = db::show_history()?;
     let history = HistoryTemplate { entries };
     let uservalue = req

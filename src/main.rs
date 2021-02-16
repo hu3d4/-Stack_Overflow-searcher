@@ -22,7 +22,7 @@ async fn main() -> std::io::Result<()> {
             .route("/get_history", web::post().to(get_history))
             .route("/get_user", web::post().to(get_user))
             .route("/get_user/{username}", web::get().to(index_user))
-            .route("/get_user/{username}", web::get().to(index))
+            .route("/get_user/{username}", web::get().to(authenticated))
             .route("/delete/{username}", web::post().to(delete_history))
             .route("/delete_one", web::post().to(delete_single_history))
             .service(fs::Files::new("/", "/static"))
