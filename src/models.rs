@@ -47,5 +47,4 @@ pub struct HistoryTemplate {
 pub struct UserHistoryTemplate {
     pub history: HistoryTemplate,
     pub user: String,
-    // pub user: UserTemplate,
 }
