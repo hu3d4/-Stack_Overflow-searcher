@@ -7,7 +7,14 @@ use askama::Template;
 // historyに格納されているデータを表示する関数
 pub async fn index() -> Result<impl Responder, AppError> {
     let entries = db::show_history()?;
-    let html = HistoryTemplate { entries };
+    let history = HistoryTemplate { entries };
+    let uservalue = req
+        .match_info()
+        .get("username")
+        .expect("Failed to load user information.");
+    let user = uservalue.to_string();
+
+    let html = UserHistoryTemplate { history, user };
     let response_body = html.render()?;
     Ok(HttpResponse::Ok()
         .content_type("text/html")
