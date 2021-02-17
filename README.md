@@ -5,7 +5,9 @@ Stack Overflow searcherは検索ボックスに入力された文字列をGoogle
 普通にGoogleで検索するとSEOの強い記事がヒットして、本当にほしい情報を見つけることが大変なときがあります。
 そんなときにこれを使えば英語のStack Overflowのサイトだけを表示してくれるのでプログラミング学習を円滑に進めることがきでます。
 
-注意:使用するブラウザはchromeを想定して作られています。
+
+注意: 使用するブラウザはchromeを想定して作られています。
+      ページをリロードしないと履歴が反映されない場合があります。
 
 ![Screenshot_2021-02-08 Stack Overflow Searcher](https://user-images.githubusercontent.com/66501033/107167188-87bdc200-69fb-11eb-9ccb-6cede2199372.png)
 
