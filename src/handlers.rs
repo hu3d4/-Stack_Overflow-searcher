@@ -14,7 +14,7 @@ pub async fn index() -> Result<impl Responder, AppError> {
         .body(response_body))
 }
 
-pub async fn authenticated(req: HttpRequest) -> Result<impl Responder, AppError> {
+pub async fn authenticated(req: HttpRequest) -> Result<HttpResponse, AppError> {
     let uservalue = req
         .match_info()
         .get("username")
@@ -47,7 +47,7 @@ pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppErr
         .finish())
 }
 
-pub async fn delete_history(req: HttpRequest) -> Result<impl Responder, AppError> {
+pub async fn delete_history(req: HttpRequest) -> Result<HttpResponse, AppError> {
     let uservalue = req
         .match_info()
         .get("username")
@@ -73,4 +73,51 @@ pub async fn delete_single_history(
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, format!("/get_user/{}", user_name))
         .finish())
+}
+
+// async fn index(req: HttpRequest) -> HttpResponse {
+//     if let Some(hdr) = req.headers().get(header::CONTENT_TYPE) {
+//         HttpResponse::Ok().into()
+//     } else {
+//         HttpResponse::BadRequest().into()
+//     }
+// }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use actix_web::http;
+    use actix_web::test;
+    use pretty_assertions::assert_eq;
+
+    // #[actix_rt::test]
+    // async fn test_index_ok() {
+    //     let req = test::TestRequest::with_uri("/get_user/{username}").to_http_request();
+    //     let resp = authenticated(req).await.unwrap();
+    //     assert_eq!(resp.status(), http::StatusCode::OK);
+    // }
+
+    // #[actix_rt::test]
+    // async fn test_delete_index_ok() {
+    //     let req = test::TestRequest::with_uri("/delete/{username}").to_http_request();
+    //     let resp = delete_history(req).await.unwrap();
+    //     assert_eq!(resp.status(), http::StatusCode::OK);
+    // }
+
+    #[actix_rt::test]
+    async fn test_index_not_ok() {
+        use actix_web::HttpMessage;
+        let payload = GetUser {
+            username: "jeiow".to_string(),
+        };
+        let req = test::TestRequest::post()
+            .uri("/get_history")
+            .set_form(&payload)
+            .to_request();
+        // let resp = get_user(payload).await;
+        // let resp = get_user(req).await;
+        assert_eq!(req.content_type(), "application/x-www-form-urlencoded");
+        // let resp = get_user(req).await;
+        // assert_eq!(resp, http::StatusCode::BAD_REQUEST);
+    }
 }
