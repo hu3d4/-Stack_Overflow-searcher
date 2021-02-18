@@ -1,6 +1,6 @@
 use crate::schema::*;
 use askama::Template;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Queryable)]
 pub struct History {
@@ -24,7 +24,7 @@ pub struct GetHistory {
     pub username: String,
 }
 
-#[derive(Insertable, Deserialize)]
+#[derive(Insertable, Serialize, Deserialize)]
 #[table_name = "users"]
 pub struct GetUser {
     pub username: String,
