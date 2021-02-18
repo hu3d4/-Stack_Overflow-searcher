@@ -86,38 +86,65 @@ pub async fn delete_single_history(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use actix_web::http;
-    use actix_web::test;
+    use actix_web::{http, test, web, App};
     use pretty_assertions::assert_eq;
 
-    // #[actix_rt::test]
-    // async fn test_index_ok() {
-    //     let req = test::TestRequest::with_uri("/get_user/{username}").to_http_request();
-    //     let resp = authenticated(req).await.unwrap();
-    //     assert_eq!(resp.status(), http::StatusCode::OK);
-    // }
-
-    // #[actix_rt::test]
-    // async fn test_delete_index_ok() {
-    //     let req = test::TestRequest::with_uri("/delete/{username}").to_http_request();
-    //     let resp = delete_history(req).await.unwrap();
-    //     assert_eq!(resp.status(), http::StatusCode::OK);
-    // }
+    use actix_web::{http::StatusCode, HttpResponse};
 
     #[actix_rt::test]
-    async fn test_index_not_ok() {
-        use actix_web::HttpMessage;
-        let payload = GetUser {
-            username: "jeiow".to_string(),
-        };
-        let req = test::TestRequest::post()
-            .uri("/get_history")
-            .set_form(&payload)
-            .to_request();
-        // let resp = get_user(payload).await;
-        // let resp = get_user(req).await;
-        assert_eq!(req.content_type(), "application/x-www-form-urlencoded");
-        // let resp = get_user(req).await;
-        // assert_eq!(resp, http::StatusCode::BAD_REQUEST);
+    async fn test_response() {
+        let mut app = test::init_service(
+            App::new().route("/delete/{username}", web::post().to(delete_history)),
+        )
+        .await;
+
+        let req = test::TestRequest::with_uri("/delete/username").to_request();
+        let resp = test::call_service(&mut app, req).await;
+        assert_eq!(resp.status(), StatusCode::OK);
     }
+
+    //     // #[actix_rt::test]
+    //     // async fn test_index_ok() {
+    //     //     let req = test::TestRequest::with_uri("/get_user/{username}").to_http_request();
+    //     //     let resp = authenticated(req).await.unwrap();
+    //     //     assert_eq!(resp.status(), http::StatusCode::OK);
+    //     // }
+
+    //     use actix_web::{http::StatusCode, HttpResponse};
+
+    //     #[actix_rt::test]
+    //     async fn test_response() {
+    //         let mut app = test::init_service(
+    //             App::new().route("/delete/{username}", web::post().to(delete_history)),
+    //         )
+    //         .await;
+
+    //         let req = test::TestRequest::with_uri("/delete/username").to_request();
+    //         let resp = test::call_service(&mut app, req).await;
+    //         assert_ne!(resp.status(), StatusCode::OK);
+    //     }
+
+    //     // #[actix_rt::test]
+    //     // async fn test_delete_index_ok() {
+    //     //     let req = test::TestRequest::with_uri("/delete/{username}").to_http_request();
+    //     //     let resp = delete_history(req).await.unwrap();
+    //     //     assert_eq!(resp.status(), http::StatusCode::OK);
+    //     // }
+
+    //     #[actix_rt::test]
+    //     async fn test_index_not_ok() {
+    //         use actix_web::HttpMessage;
+    //         let payload = GetUser {
+    //             username: "jeiow".to_string(),
+    //         };
+    //         let req = test::TestRequest::post()
+    //             .uri("/get_history")
+    //             .set_form(&payload)
+    //             .to_request();
+    //         // let resp = get_user(payload).await;
+    //         // let resp = get_user(req).await;
+    //         assert_eq!(req.content_type(), "application/x-www-form-urlencoded");
+    //         // let resp = get_user(req).await;
+    //         // assert_eq!(resp, http::StatusCode::BAD_REQUEST);
+    //     }
 }
