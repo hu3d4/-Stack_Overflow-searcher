@@ -32,8 +32,8 @@ pub async fn authenticated(req: HttpRequest) -> Result<impl Responder, AppError>
 }
 
 pub async fn get_history(form: web::Form<GetHistory>) -> Result<impl Responder, AppError> {
-    let input = form.input.clone();
-    let username = form.username.clone();
+    let input = form.0.input;
+    let username = form.0.username;
     db::get_history(input, username)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
@@ -41,7 +41,7 @@ pub async fn get_history(form: web::Form<GetHistory>) -> Result<impl Responder, 
 }
 
 pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppError> {
-    let user_name = form.username.clone();
+    let user_name = form.0.username;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, format!("/get_user/{}", user_name))
         .finish())
