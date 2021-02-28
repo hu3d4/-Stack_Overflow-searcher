@@ -1,4 +1,5 @@
 use crate::schema::*;
+use actix_web::HttpRequest;
 use askama::Template;
 use serde::Deserialize;
 
@@ -48,3 +49,43 @@ pub struct UserHistoryTemplate {
     pub history: HistoryTemplate,
     pub user: String,
 }
+
+// trait Test {
+//     fn request<T>(&self);
+
+//     fn get_username<T, S>(&self, key: T, value: S) -> String {
+//         let uservalue = key
+//             .match_info()
+//             .get(&self)
+//             .expect("Failed to load user information.");
+//         let user = uservalue.to_string();
+//         user
+//     }
+// }
+
+pub struct UserValue<'a> {
+    pub req: HttpRequest,
+    pub username: &'a str,
+}
+
+impl<'a> UserValue<'a> {
+    pub fn get_username(&self) -> String {
+        let uservalue = self
+            .req
+            .match_info()
+            .get(&self.username)
+            .expect("Failed to load user information.");
+        let user = uservalue.to_string();
+        user
+    }
+}
+
+// fn make_tuple<T, S>(t: T, s: S) -> (T, S) {
+//     (t, s)
+// }
+
+// fn main() {
+//     let t1 = make_tuple(1, 2);
+//     let t2 = make_tuple("fjei", "jfie");
+//     let t3 = make_tuple(vec![1, 2, 3], vec![4, 5, 6]);
+// }
