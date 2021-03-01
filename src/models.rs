@@ -50,17 +50,14 @@ pub struct UserHistoryTemplate {
     pub user: String,
 }
 
-pub struct UserValue<'a> {
-    pub req: HttpRequest,
-    pub username: &'a str,
-}
+pub struct UserValue<'a>(pub HttpRequest, pub &'a str);
 
 impl<'a> UserValue<'a> {
     pub fn get_username(&self) -> String {
         let uservalue = self
-            .req
+            .0
             .match_info()
-            .get(&self.username)
+            .get(&self.1)
             .expect("Failed to load user information.");
         let user = uservalue.to_string();
         user

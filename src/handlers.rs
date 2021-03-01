@@ -15,10 +15,7 @@ pub async fn index() -> Result<impl Responder, AppError> {
 }
 
 pub async fn authenticated(req: HttpRequest) -> Result<impl Responder, AppError> {
-    let uservalue = UserValue {
-        req: req,
-        username: &"username",
-    };
+    let uservalue = UserValue(req, &"username");
     let user = uservalue.get_username();
     let entries = db::show_history(&user)?;
     let history = HistoryTemplate { entries };
@@ -47,10 +44,7 @@ pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppErr
 }
 
 pub async fn delete_history(req: HttpRequest) -> Result<impl Responder, AppError> {
-    let uservalue = UserValue {
-        req: req,
-        username: &"username",
-    };
+    let uservalue = UserValue(req, &"username");
     let user_name = uservalue.get_username();
     db::delete_all_history(&user_name)?;
     Ok(HttpResponse::SeeOther()
@@ -62,10 +56,7 @@ pub async fn delete_single_history(
     req: HttpRequest,
     form: web::Form<DeleteHistory>,
 ) -> Result<impl Responder, AppError> {
-    let uservalue = UserValue {
-        req: req,
-        username: &"username",
-    };
+    let uservalue = UserValue(req, &"username");
     let user_name = uservalue.get_username();
     let id = form.id;
     db::delete_single_history(id)?;
