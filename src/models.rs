@@ -1,4 +1,5 @@
 use crate::schema::*;
+use actix_web::HttpRequest;
 use askama::Template;
 use serde::Deserialize;
 
@@ -47,4 +48,18 @@ pub struct HistoryTemplate {
 pub struct UserHistoryTemplate {
     pub history: HistoryTemplate,
     pub user: String,
+}
+
+pub struct UserValue<'a>(pub HttpRequest, pub &'a str);
+
+impl<'a> UserValue<'a> {
+    pub fn get_username(&self) -> String {
+        let uservalue = self
+            .0
+            .match_info()
+            .get(&self.1)
+            .expect("Failed to load user information.");
+        let user = uservalue.to_string();
+        user
+    }
 }

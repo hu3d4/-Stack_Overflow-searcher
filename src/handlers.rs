@@ -15,12 +15,8 @@ pub async fn index() -> Result<impl Responder, AppError> {
 }
 
 pub async fn authenticated(req: HttpRequest) -> Result<impl Responder, AppError> {
-    let uservalue = req
-        .match_info()
-        .get("username")
-        .expect("Failed to load user information.");
-    let user = uservalue.to_string();
-
+    let uservalue = UserValue(req, &"username");
+    let user = uservalue.get_username();
     let entries = db::show_history(&user)?;
     let history = HistoryTemplate { entries };
 
@@ -32,8 +28,8 @@ pub async fn authenticated(req: HttpRequest) -> Result<impl Responder, AppError>
 }
 
 pub async fn get_history(form: web::Form<GetHistory>) -> Result<impl Responder, AppError> {
-    let input = form.input.clone();
-    let username = form.username.clone();
+    let input = form.0.input;
+    let username = form.0.username;
     db::get_history(input, username)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
@@ -41,18 +37,15 @@ pub async fn get_history(form: web::Form<GetHistory>) -> Result<impl Responder, 
 }
 
 pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppError> {
-    let user_name = form.username.clone();
+    let user_name = form.0.username;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, format!("/get_user/{}", user_name))
         .finish())
 }
 
 pub async fn delete_history(req: HttpRequest) -> Result<impl Responder, AppError> {
-    let uservalue = req
-        .match_info()
-        .get("username")
-        .expect("Failed to load user information.");
-    let user_name = uservalue.to_string();
+    let uservalue = UserValue(req, &"username");
+    let user_name = uservalue.get_username();
     db::delete_all_history(&user_name)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, format!("/get_user/{}", user_name))
@@ -63,11 +56,8 @@ pub async fn delete_single_history(
     req: HttpRequest,
     form: web::Form<DeleteHistory>,
 ) -> Result<impl Responder, AppError> {
-    let uservalue = req
-        .match_info()
-        .get("username")
-        .expect("Failed to load user information.");
-    let user_name = uservalue.to_string();
+    let uservalue = UserValue(req, &"username");
+    let user_name = uservalue.get_username();
     let id = form.id;
     db::delete_single_history(id)?;
     Ok(HttpResponse::SeeOther()
