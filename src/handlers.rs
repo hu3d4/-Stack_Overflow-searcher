@@ -1,6 +1,8 @@
 use crate::db;
 use crate::errors::AppError;
-use crate::models::*;
+use crate::models::{
+    DeleteHistory, GetHistory, GetUser, HistoryTemplate, UserHistoryTemplate, UserValue,
+};
 use actix_web::{http::header, web, HttpRequest, HttpResponse, Responder};
 use askama::Template;
 
@@ -15,8 +17,8 @@ pub async fn index() -> Result<impl Responder, AppError> {
 }
 
 pub async fn authenticated(req: HttpRequest) -> Result<impl Responder, AppError> {
-    let uservalue = UserValue(req, &"username");
-    let user = uservalue.get_username();
+    let user_value = UserValue(req, &"user_name");
+    let user = user_value.get_user_name();
     let entries = db::show_history(&user)?;
     let history = HistoryTemplate { entries };
 
@@ -29,8 +31,8 @@ pub async fn authenticated(req: HttpRequest) -> Result<impl Responder, AppError>
 
 pub async fn get_history(form: web::Form<GetHistory>) -> Result<impl Responder, AppError> {
     let input = form.0.input;
-    let username = form.0.username;
-    db::get_history(input, username)?;
+    let user_name = form.0.username;
+    db::get_history(input, user_name)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, "/")
         .finish())
@@ -44,8 +46,8 @@ pub async fn get_user(form: web::Form<GetUser>) -> Result<impl Responder, AppErr
 }
 
 pub async fn delete_history(req: HttpRequest) -> Result<impl Responder, AppError> {
-    let uservalue = UserValue(req, &"username");
-    let user_name = uservalue.get_username();
+    let user_value = UserValue(req, &"user_name");
+    let user_name = user_value.get_user_name();
     db::delete_all_history(&user_name)?;
     Ok(HttpResponse::SeeOther()
         .header(header::LOCATION, format!("/get_user/{}", user_name))
@@ -56,8 +58,8 @@ pub async fn delete_single_history(
     req: HttpRequest,
     form: web::Form<DeleteHistory>,
 ) -> Result<impl Responder, AppError> {
-    let uservalue = UserValue(req, &"username");
-    let user_name = uservalue.get_username();
+    let user_value = UserValue(req, &"user_name");
+    let user_name = user_value.get_user_name();
     let id = form.id;
     db::delete_single_history(id)?;
     Ok(HttpResponse::SeeOther()

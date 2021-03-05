@@ -1,4 +1,4 @@
-use crate::schema::*;
+use crate::schema::{histories, users};
 use actix_web::HttpRequest;
 use askama::Template;
 use serde::Deserialize;
@@ -6,7 +6,7 @@ use serde::Deserialize;
 #[derive(Debug, Queryable)]
 pub struct History {
     pub id: i32,
-    pub username: String,
+    pub user_name: String,
     pub input: String,
     pub done: bool,
 }
@@ -14,7 +14,7 @@ pub struct History {
 #[derive(Debug, Queryable)]
 pub struct User {
     pub userid: i32,
-    pub username: String,
+    pub user_name: String,
     pub login_status: bool,
 }
 
@@ -53,7 +53,7 @@ pub struct UserHistoryTemplate {
 pub struct UserValue<'a>(pub HttpRequest, pub &'a str);
 
 impl<'a> UserValue<'a> {
-    pub fn get_username(&self) -> String {
+    pub fn get_user_name(&self) -> String {
         let uservalue = self
             .0
             .match_info()
