@@ -60,3 +60,12 @@
 .history__item {
     color: #950000;
 }
+
+.hidden {
+  display: none;
+}
+  
+label {
+  margin-bottom: 10px;
+  display: block;
+}
