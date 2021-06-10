@@ -69,6 +69,18 @@ const updateUI = async () => {
 			document.getElementById("ipt-user-profile").value;
 		const elementsGroup = document.getElementsByClassName("history__group");
 
+		const historyDatalist =
+			document.getElementsByClassName("history__datalist");
+
+		for (let i = 0; i < elementsGroup.length; i++) {
+			if (
+				getUserSubjectValue ==
+				elementsGroup.item(i).children[1].textContent.trim()
+			) {
+				historyDatalist[i].disabled = false;
+			}
+		}
+
 		for (let i = 0; i < elementsGroup.length; i++) {
 			if (
 				elementsGroup.item(i).children[1].textContent.trim() !=
