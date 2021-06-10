@@ -1,62 +1,71 @@
 .main {
-    width: 440px;
-    margin-right: auto;
-    margin-left: auto;
+	width: 440px;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .main-text {
-    color: #950000;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
+	color: #950000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
 }
 
 .search {
-    width: 370px;
-    height: 29px;
-    margin-right: -10px;
+	width: 370px;
+	height: 29px;
+	margin-right: -10px;
 }
 
-.search__box {
-    width: 263px;
+.search_box {
+	width: 263px;
 }
 
-.search__button {
-    color: #FFF;
-    background-color: #461200;
-    width: 71px;
-    height: 29px;
+.regular_button {
+	color: #fff;
+	background-color: #461200;
+	width: 71px;
+	height: 29px;
 }
 
 .delete {
-    width: 71px;
-    padding-left: 10px;
+	width: 71px;
+	padding-left: 10px;
 }
 
 .content {
-    display: flex;
-    width: 440px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 30px;
+	display: flex;
+	width: 440px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 30px;
 }
 
 .border {
-    border-bottom: 1px solid;
-    color: rgba(0, 0, 0, .1);
+	border-bottom: 1px solid;
+	color: rgba(0, 0, 0, 0.1);
 }
 
-.history__area {
-    list-style: none;
-    padding-left: 0px;
-    position: relative;
+.history__list {
+	list-style: none;
+	padding-left: 0px;
+	position: relative;
 }
 
 .history__group {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 18px;
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 18px;
 }
 
 .history__item {
-    color: #950000;
+	color: #950000;
+}
+
+.hidden {
+	display: none;
+}
+
+label {
+	margin-bottom: 10px;
+	display: block;
 }

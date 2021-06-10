@@ -38,16 +38,9 @@ pub struct DeleteHistory {
 }
 
 #[derive(Template)]
-#[template(path = "index.html")]
+#[template(path = "authenticated.html")]
 pub struct HistoryTemplate {
     pub entries: Vec<History>,
-}
-
-#[derive(Template)]
-#[template(path = "authenticated.html")]
-pub struct UserHistoryTemplate {
-    pub history: HistoryTemplate,
-    pub user: String,
 }
 
 pub struct UserValue<'a>(pub HttpRequest, pub &'a str);

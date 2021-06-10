@@ -22,11 +22,11 @@ pub fn get_history(input: String, username: String) -> Result<History, AppError>
         .map_err(|e| (AppError::DbError(e)));
 }
 
-pub fn show_history(user_name: &String) -> Result<Vec<History>, AppError> {
+pub fn show_history() -> Result<Vec<History>, AppError> {
     use crate::schema::histories::dsl::*;
     let conn = establish_connection();
     return histories
-        .filter(username.eq(format!("{}", user_name)))
+        .filter(done.eq(true))
         .limit(15)
         .load::<History>(&conn)
         .map_err(|e| (AppError::DbError(e)));
