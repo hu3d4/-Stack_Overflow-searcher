@@ -27,6 +27,36 @@
 	height: 29px;
 }
 
+.regular_button--search {
+	position: relative;
+	top: -26px;
+	right: -280px;
+	color: #fff;
+	background-color: #461200;
+	width: 71px;
+	height: 29px;
+}
+
+.regular_button--all_delete {
+	position: relative;
+	top: -62px;
+	right: -350px;
+	color: #fff;
+	background-color: #461200;
+	width: 71px;
+	height: 29px;
+}
+
+.regular_button--authentication {
+	position: relative;
+	right: -200px;
+	margin-right: 10px;
+	color: #fff;
+	background-color: #461200;
+	width: 80px;
+	height: 29px;
+}
+
 .delete {
 	width: 71px;
 	padding-left: 10px;
@@ -63,9 +93,4 @@
 
 .hidden {
 	display: none;
-}
-
-label {
-	margin-bottom: 10px;
-	display: block;
 }

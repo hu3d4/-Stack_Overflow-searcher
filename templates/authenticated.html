@@ -32,11 +32,25 @@
 					value=""
 					style="display: none"
 				/>
-				<button class="regular_button" onclick="callAfter()">Search</button>
+				<button class="regular_button--search" onclick="callAfter()">
+					Search
+				</button>
 			</form>
 
-			<button id="btn-login" disabled="true" onclick="login()">Log in</button>
-			<button id="btn-logout" disabled="true" onclick="logout()">
+			<button
+				id="btn-login"
+				class="regular_button--authentication"
+				disabled="true"
+				onclick="login()"
+			>
+				Log in
+			</button>
+			<button
+				id="btn-logout"
+				class="regular_button--authentication"
+				disabled="true"
+				onclick="logout()"
+			>
 				Log out
 			</button>
 
@@ -64,7 +78,7 @@
 
 			<form name="DeleteAll" class="delete" method="post">
 				<input type="text" value="" style="display: none" />
-				<button class="regular_button">AllDelete</button>
+				<button class="regular_button--all_delete">AllDelete</button>
 			</form>
 
 			<section class="history">
